@@ -1,5 +1,6 @@
 package main;
 
+import entity.Player;
 import java.awt.*;
 import javax.swing.JPanel;
 
@@ -11,12 +12,9 @@ public class Game extends JPanel implements Runnable{
     final int screenWidth = 960;
     final int screenHeight = 780;
 
+    Player player = new Player();
     KeyHandler KeyH = new KeyHandler();
     Thread gameThread;
-
-    int playerXdis = 480;
-    int playerYdis = 690;
-    final int playerSpeed = 10;
 
     public Game() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -42,7 +40,7 @@ public class Game extends JPanel implements Runnable{
         while(gameThread != null) {
 
             update();
-            
+
             repaint();
 
             try {
@@ -64,20 +62,16 @@ public class Game extends JPanel implements Runnable{
     }
 
     public void update() {
-        if(KeyH.leftPress == true) {
-            playerXdis -= playerSpeed;
-        }
-        else if(KeyH.rightPress == true) {
-            playerXdis += playerSpeed;
-        }
+        player.update(KeyH);
     }
+    
     public void paint(Graphics g) {
         super.paint(g);
 
         Graphics2D g2d = (Graphics2D) g;
         
         g2d.setColor(Color.WHITE);
-        g2d.fillOval(playerXdis, playerYdis, 20, 20);
+        g2d.fillOval(player.x, player.y, 20, 20);
 
         g2d.dispose();
     }
