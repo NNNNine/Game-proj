@@ -9,6 +9,7 @@ import javax.swing.Timer;
 
 public class Gameplay extends JPanel implements KeyListener, ActionListener{
     private boolean play = false;
+    private boolean shoot = false;
     private int score = 0;
 
     private int totalBrick = 18;
@@ -45,16 +46,34 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener{
         g.setColor(Color.green);
         g.fillRect(playerX, 700, 100, 8);
 
-        //the ball
-        g.setColor(Color.yellow);
-        g.fillRect(ballPosX, ballPosY, 20, 20);
-    
+        
+        
+        if(shoot) {
+            //the ball
+            g.setColor(Color.yellow);
+            g.fillOval(ballPosX, ballPosY, 20, 20);
+        }
+
         g.dispose();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         timer.start();
+        if(play) {
+            ballPosX += ballXdir;
+            ballPosY += ballYdir;
+            if(ballPosX < 0) {
+                ballXdir = -ballXdir;
+            }
+            if(ballPosY < 0) {
+                ballYdir = -ballYdir;
+            }
+            if(ballPosX > 760) {
+                ballXdir = -ballXdir;
+            }
+        }
+
         repaint();
         
     }
@@ -93,10 +112,10 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener{
 
     public void moveRight() {
         timer.start();
-        playerX += 20;
+        playerX += 10;
     }
     public void moveLeft() {
         timer.start();
-        playerX -= 20;
+        playerX -= 10;
     }
 }
