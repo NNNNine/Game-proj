@@ -1,26 +1,23 @@
 package main;
 
 import entity.Player;
+import map.RandomMap;
 
 import java.awt.*;
-
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 public class Game extends JPanel implements Runnable{
     
     //Screen Res
     final int maxScreenCol = 16;
     final int maxScreenRow = 13;
-
     final int screenWidth = 960;
     final int screenHeight = 780;
 
     //Objects
     KeyHandler KeyH = new KeyHandler();
     Player player = new Player(this, KeyH);
+    RandomMap map = new RandomMap();
     Thread gameThread;
 
     public Game() {
@@ -38,7 +35,6 @@ public class Game extends JPanel implements Runnable{
     
     //FPS
     final int FPS = 60;
-
     @Override
     public void run() {
         
@@ -77,6 +73,7 @@ public class Game extends JPanel implements Runnable{
         super.paint(g);
         Graphics2D g2d = (Graphics2D) g;
         
+        map.draw(g2d);
         player.draw(g2d);
 
         g2d.dispose();
