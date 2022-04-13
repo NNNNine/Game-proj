@@ -1,19 +1,26 @@
 package main;
 
 import entity.Player;
+
 import java.awt.*;
+
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class Game extends JPanel implements Runnable{
     
+    //Screen Res
     final int maxScreenCol = 16;
     final int maxScreenRow = 13;
 
     final int screenWidth = 960;
     final int screenHeight = 780;
 
-    Player player = new Player();
+    //Objects
     KeyHandler KeyH = new KeyHandler();
+    Player player = new Player(this, KeyH);
     Thread gameThread;
 
     public Game() {
@@ -28,7 +35,8 @@ public class Game extends JPanel implements Runnable{
         gameThread = new Thread(this);
         gameThread.start();
     }
-     
+    
+    //FPS
     final int FPS = 60;
 
     @Override
@@ -62,16 +70,14 @@ public class Game extends JPanel implements Runnable{
     }
 
     public void update() {
-        player.update(KeyH);
+        player.update();
     }
-    
+
     public void paint(Graphics g) {
         super.paint(g);
-
         Graphics2D g2d = (Graphics2D) g;
         
-        g2d.setColor(Color.WHITE);
-        g2d.fillOval(player.x, player.y, 20, 20);
+        player.draw(g2d);
 
         g2d.dispose();
     }
