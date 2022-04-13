@@ -7,21 +7,25 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class RandomMap {
-    public static String[] allMap = {"/map/plain.png", "/map/desert.png", "/map/arid.png"};
+    public static String[] allMap = {"snow.png", "plain.png", "desert.png", "arid.png"};
     public String chooseMap;
     BufferedImage stage;
 
     public RandomMap() {
+        chooseMap = getMap();
+
         try {
-            stage = ImageIO.read(getClass().getResourceAsStream("Punball/src/res/map/arid.png"));
+            stage = ImageIO.read(getClass().getResourceAsStream(chooseMap));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void getMap() {
+    public static String getMap() {
         Random r = new Random();
         int temp_index = r.nextInt(4);
+
+        return allMap[temp_index];
     }
 
     public void draw(Graphics2D g2) {
