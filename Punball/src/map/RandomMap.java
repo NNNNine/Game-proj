@@ -1,13 +1,13 @@
 package map;
-import java.util.Random;
 
+import java.util.Random;
 import javax.imageio.ImageIO;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class RandomMap {
-    public static String[] allMap = {"snow.png", "plain.png", "desert.png", "arid.png"};
+    public static String[] allMap = {"res/snow.png", "res/plain.png", "res/desert.png", "res/arid.png"};
     public String chooseMap;
     BufferedImage stage;
 
