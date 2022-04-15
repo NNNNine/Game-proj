@@ -1,28 +1,32 @@
 package entity;
 
-import java.awt.*;
 import javax.imageio.ImageIO;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import main.Game;
 import main.KeyHandler;
+import main.MouseClick;
 
-public class Player {
-    public int x, y;
+public class Player extends Entity{
+
     public final int playerSpeed;
     public BufferedImage left1, left2, right1, right2, stand;
     public String dir;
+    public int animation = 1, ani_co = 0;
 
     KeyHandler keyH;
     Game game;
+    MouseClick mC;
 
-    public Player(Game g, KeyHandler k) {
+    public Player(Game g, KeyHandler k, MouseClick mC) {
         x = 480;
         y = 665;
-        playerSpeed = 6;
+        playerSpeed = 3;
         game = g;
         keyH = k;
+        this.mC = mC;
         dir = "stand";
 
         getPlayer();
@@ -44,25 +48,55 @@ public class Player {
         if(keyH.leftPress == true) {
             dir = "left";
             x -= playerSpeed;
+            if(x < 300) {
+                x = 300;
+            }
         }
         else if(keyH.rightPress == true) {
             dir = "right";
             x += playerSpeed;
+            if(x > 620) {
+                x = 620;
+            }
+        }
+        else if(keyH.notPress == true) {
+            dir = "stand";
+        }
+
+        ani_co++;
+        if(ani_co > 10) {
+            if(animation == 1) {
+                animation = 2;
+            }
+            else if(animation == 2) {
+                animation = 1;
+            }
+
+            ani_co = 0;
         }
     }
 
     public void draw(Graphics2D g2) {
-        //g2.setColor(Color.black);
-        //g2.fillOval(x, y, 50, 47);
+
         BufferedImage image = null;
 
         switch (dir) {
             case "left":
-                image = left1;
+                if(animation == 1 && !mC.clicked) {
+                    image = left1;
+                }
+                if(animation == 2 && !mC.clicked) {
+                    image = left2;
+                }
                 break;
             
             case "right":
-                image = right1;
+                if(animation == 1 && !mC.clicked) {
+                    image = right1;
+                }
+                if(animation == 2 && !mC.clicked) {
+                    image = right2;
+                }
                 break;
             default:
                 image = stand;
@@ -70,5 +104,10 @@ public class Player {
         }
 
         g2.drawImage(image, null, x, y);
+    }
+
+    @Override
+    public Rectangle getBound() {
+        return new Rectangle(10, 1, 30, 47);
     }
 }

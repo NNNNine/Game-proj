@@ -1,6 +1,10 @@
 package main;
 
 import entity.Player;
+import entity.Enemy;
+import map.MapCollision1;
+import map.MapCollision2;
+import map.MapCollision3;
 import map.RandomMap;
 
 import java.awt.*;
@@ -15,9 +19,19 @@ public class Game extends JPanel implements Runnable{
     final int screenHeight = 780;
 
     //Objects
+    MouseClick m_Click = new MouseClick();
+    MouseMove m_Move = new MouseMove();
     KeyHandler KeyH = new KeyHandler();
-    Player player = new Player(this, KeyH);
+
+    Enemy enemy = new Enemy();
+    Player player = new Player(this, KeyH, m_Click);
     RandomMap map = new RandomMap();
+
+    //Map-Collision
+    MapCollision1 m1 = new MapCollision1();
+    MapCollision2 m2 = new MapCollision2();
+    MapCollision3 m3 = new MapCollision3();
+
     Thread gameThread;
 
     public Game() {
@@ -75,6 +89,7 @@ public class Game extends JPanel implements Runnable{
         
         map.draw(g2d);
         player.draw(g2d);
+        enemy.draw(g2d);
 
         g2d.dispose();
     }

@@ -5,7 +5,7 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
 
-    public boolean leftPress, rightPress;
+    public boolean leftPress, rightPress, notPress;
     @Override
     public void keyTyped(KeyEvent e) {
         // TODO Auto-generated method stub
@@ -19,9 +19,11 @@ public class KeyHandler implements KeyListener {
 
         if(temp == KeyEvent.VK_A) {
             leftPress = true;
+            notPress = false;
         }
         if(temp == KeyEvent.VK_D) {
             rightPress = true;
+            notPress = false;
         }
     }
 
@@ -32,9 +34,11 @@ public class KeyHandler implements KeyListener {
         
         if(temp == KeyEvent.VK_A) {
             leftPress = false;
+            notPress = true;
         }
         if(temp == KeyEvent.VK_D) {
             rightPress = false;
+            notPress = true;
         }
     }
     
