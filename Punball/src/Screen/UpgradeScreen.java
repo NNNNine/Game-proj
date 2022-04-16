@@ -19,7 +19,14 @@ public class UpgradeScreen extends JPanel implements ActionListener {
     JButton hp8000button;
     JButton hp10000button;
 
-    public UpgradeScreen() {
+    private CardLayout cardLayout;
+    private JPanel mainPanel;
+
+    public UpgradeScreen(CardLayout cardLayout, JPanel mainPanel) {
+
+        this.cardLayout = cardLayout;
+        this.mainPanel = mainPanel;
+
         this.setLayout(null);
 
         JLabel screenImage = new JLabel();
@@ -118,7 +125,7 @@ public class UpgradeScreen extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == buttonStartUp) {
-            System.out.println("Clicked start yay");
+            cardLayout.show(mainPanel,"gameScreen");
 
         }
 
@@ -144,7 +151,7 @@ public class UpgradeScreen extends JPanel implements ActionListener {
         } else if (e.getSource() == damage200button || e.getSource() == damage400button
                 || e.getSource() == damage600button || e.getSource() == damage800button
                 || e.getSource() == damage1000button) {
-                    
+
             resetDamageButton();
 
             if (e.getSource() == damage200button) {

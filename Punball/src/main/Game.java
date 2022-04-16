@@ -32,9 +32,17 @@ public class Game extends JPanel implements Runnable{
     MapCollision2 m2 = new MapCollision2();
     MapCollision3 m3 = new MapCollision3();
 
+    //Switching page
+    private CardLayout cardLayout;
+    private JPanel mainPanel;
+
     Thread gameThread;
 
-    public Game() {
+    public Game(CardLayout cardLayout,JPanel mainPanel) {
+        
+        this.cardLayout = cardLayout;
+        this.mainPanel = mainPanel;
+
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
