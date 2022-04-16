@@ -1,12 +1,14 @@
-package titlescreen;
+package Screen;
 
 import java.awt.*;
-
+import java.awt.event.*;
 import javax.swing.*;
 
-public class TitleScreen extends JPanel{
+public class TitleScreen extends JPanel implements ActionListener{
     private final int PANEL_WIDTH = 960;
     private final int PANEL_HEIGHT = 780;
+    JButton buttonStart ;
+    JButton buttonUpgrade;
 
     public TitleScreen(){
 
@@ -17,17 +19,14 @@ public class TitleScreen extends JPanel{
         screenImage.setBounds(0,0,PANEL_WIDTH,PANEL_HEIGHT);
 
         Icon iconStart = new ImageIcon("imgs/StartButton.png");
-        JButton buttonStart = new JButton(iconStart);
+        buttonStart= new JButton(iconStart);
         buttonStart.setBounds(328, 395, 300, 95);
+        buttonStart.addActionListener(this);
 
         Icon iconUpgrade = new ImageIcon("imgs/UpgradeButton.png");
-        JButton buttonUpgrade = new JButton(iconUpgrade);
-        buttonUpgrade.setBounds(328, 510, 300, 95);
-
-
-        
-
-
+        buttonUpgrade = new JButton(iconUpgrade);
+        buttonUpgrade.setBounds(328, 500, 300, 95);
+        buttonUpgrade.addActionListener(this);
         
         this.add(buttonStart);
         this.add(buttonUpgrade);
@@ -35,6 +34,19 @@ public class TitleScreen extends JPanel{
         this.setPreferredSize(new Dimension(PANEL_WIDTH,PANEL_HEIGHT));
 
 
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource()==buttonStart){
+            System.out.println("Clicked start yay");
+            
+        }
+
+        if (e.getSource()==buttonUpgrade){
+            System.out.println("Clicked upgrade yay");
+        }
+        
     }
     
 }
