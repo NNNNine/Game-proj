@@ -4,11 +4,15 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+
+
 public class TitleScreen extends JPanel implements ActionListener{
     private final int PANEL_WIDTH = 960;
     private final int PANEL_HEIGHT = 780;
     JButton buttonStart ;
     JButton buttonUpgrade;
+    
+    // CardLayout cardLayout;
 
     public TitleScreen(){
 
@@ -27,6 +31,13 @@ public class TitleScreen extends JPanel implements ActionListener{
         buttonUpgrade = new JButton(iconUpgrade);
         buttonUpgrade.setBounds(328, 500, 300, 95);
         buttonUpgrade.addActionListener(this);
+
+        // mainPanel = new JPanel(); 
+        // mainPanel.setLayout(cardLayout);
+        // mainPanel.setBounds(0,0,PANEL_WIDTH,PANEL_HEIGHT);
+        // mainPanel.add(Game,"game");
+        // mainPanel.add(UpgradeScreen,"upgradeScreen");
+
         
         this.add(buttonStart);
         this.add(buttonUpgrade);
