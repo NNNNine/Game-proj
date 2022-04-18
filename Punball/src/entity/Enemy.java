@@ -14,7 +14,7 @@ public class Enemy extends Entity{
     public String chooseEnemy;
 
     public static String[] allEnemy = {
-        "imgs/monsterYellow.png", "imgs/monsterPurple.png", "imgs/monsterBlue.png","imgs/monsterGreen.png","imgs/monsterPink.png"
+        "imgs/monsterYellows.png", "imgs/monsterReds.png", "imgs/monsterBlues.png","imgs/monsterGreens.png","imgs/monsterSkys.png"
     };
 
     public Enemy() {
