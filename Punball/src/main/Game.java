@@ -1,11 +1,14 @@
 package main;
 
 import entity.Player;
+
 import entity.Enemy;
 import map.MapCollision1;
 import map.MapCollision2;
 import map.MapCollision3;
 import map.RandomMap;
+
+import entity.*;
 
 import java.awt.*;
 import javax.swing.JPanel;
@@ -23,6 +26,7 @@ public class Game extends JPanel implements Runnable{
     MouseMove m_Move = new MouseMove();
     KeyHandler KeyH = new KeyHandler();
 
+    // RandomEnemy enemy = new RandomEnemy();
     Enemy enemy = new Enemy();
     Player player = new Player(this, KeyH, m_Click);
     RandomMap map = new RandomMap();
@@ -95,6 +99,7 @@ public class Game extends JPanel implements Runnable{
         super.paint(g);
         Graphics2D g2d = (Graphics2D) g;
         
+   
         map.draw(g2d);
         player.draw(g2d);
         enemy.draw(g2d);

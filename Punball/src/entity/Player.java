@@ -29,6 +29,8 @@ public class Player extends Entity{
         this.mC = mC;
         dir = "stand";
 
+        //ต้องมี hp level จาก upgrade
+
         getPlayer();
     }
 

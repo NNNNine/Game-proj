@@ -23,7 +23,7 @@ public class TitleScreen extends JPanel implements ActionListener {
         this.setLayout(null);
 
         JLabel screenImage = new JLabel();
-        screenImage.setIcon(new ImageIcon("imgs/punballscreen.png"));
+        screenImage.setIcon(new ImageIcon("imgs/titlesreenmoving.gif"));
         screenImage.setBounds(0, 0, PANEL_WIDTH, PANEL_HEIGHT);
 
         Icon iconStart = new ImageIcon("imgs/StartButton.png");
@@ -41,10 +41,11 @@ public class TitleScreen extends JPanel implements ActionListener {
         // mainPanel.setBounds(0,0,PANEL_WIDTH,PANEL_HEIGHT);
         // mainPanel.add(Game,"game");
         // mainPanel.add(UpgradeScreen,"upgradeScreen");
-
+        
         this.add(buttonStart);
         this.add(buttonUpgrade);
         this.add(screenImage);
+        
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
 
     }

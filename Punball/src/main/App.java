@@ -17,7 +17,6 @@ public class App {
         screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         screen.setResizable(false);
         screen.setTitle("Punball");
-        screen.setLocationRelativeTo(null);
 
         JPanel mainPanel = new JPanel();
         CardLayout cardLayout = new CardLayout();
@@ -31,6 +30,7 @@ public class App {
         screen.add(mainPanel);
         screen.setVisible(true);
         screen.pack();
+        screen.setLocationRelativeTo(null);
 
         game.startGameThread();
     }
