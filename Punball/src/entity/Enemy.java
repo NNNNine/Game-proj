@@ -1,20 +1,17 @@
 package entity;
 
 import java.util.Random;
-
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
-import javax.swing.plaf.DimensionUIResource;
-
+import javax.swing.*;
 import java.awt.*;
 
-public class Enemy extends Entity{
+public class Enemy extends Entity {
     public int health;
     private Image image;
     public String chooseEnemy;
 
     public static String[] allEnemy = {
-        "imgs/monsterYellows.png", "imgs/monsterReds.png", "imgs/monsterBlues.png","imgs/monsterGreens.png","imgs/monsterSkys.png"
+            "imgs/monsterYellows.png", "imgs/monsterReds.png", "imgs/monsterBlues.png", "imgs/monsterGreens.png",
+            "imgs/monsterSkys.png"
     };
 
     public Enemy() {
@@ -32,12 +29,6 @@ public class Enemy extends Entity{
     public void update() {
 
     }
-
-    // public void loadImage(){
-    //     image = new ImageIcon("imgs/monsterYellow.png").getImage();
-    //     JPanel panel = new JPanel();
-    //     panel.setPreferredSize(new DimensionUIResource(100, 100));
-    // }
 
     public void draw(Graphics2D g2) {
         image = new ImageIcon(chooseEnemy).getImage();

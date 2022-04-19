@@ -1,6 +1,8 @@
 package entity;
 
 import javax.imageio.ImageIO;
+
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -28,8 +30,6 @@ public class Player extends Entity{
         keyH = k;
         this.mC = mC;
         dir = "stand";
-
-        //ต้องมี hp level จาก upgrade
 
         getPlayer();
     }
@@ -106,6 +106,23 @@ public class Player extends Entity{
         }
 
         g2.drawImage(image, null, x, y);
+        g2.setPaint(Color.red);
+        g2.fillRect(300, 725, 360, 25);   
+        g2.drawString(String.valueOf(super.getHP()), 350, 700);
+    }
+
+    @Override
+    public void decreaseHP(int attack){
+        this.hpLevel -= attack;
+        
+    }
+
+
+    public float calculateBarHP(int attack){
+        super.decreaseHP(attack);
+        int hp = super.getHP();
+        float ans = 360 - (((hp-attack)/ (float) maxHP)*360);
+        return ans;
     }
 
     @Override
