@@ -27,11 +27,17 @@ public class WinScreen extends JPanel implements ActionListener {
         Icon iconStart = new ImageIcon("imgs/NextButton.png");
         buttonNext = new JButton(iconStart);
         buttonNext.setBounds(328, 395, 300, 95);
+        buttonNext.setOpaque(false);
+        buttonNext.setBorderPainted(false);
+        buttonNext.setContentAreaFilled(false);
         buttonNext.addActionListener(this);
 
         Icon iconQuit = new ImageIcon("imgs/QuitButton.png");
         buttonQuit = new JButton(iconQuit);
         buttonQuit.setBounds(328, 500, 300, 95);
+        buttonQuit.setOpaque(false);
+        buttonQuit.setBorderPainted(false);
+        buttonQuit.setContentAreaFilled(false);
         buttonQuit.addActionListener(this);
 
         

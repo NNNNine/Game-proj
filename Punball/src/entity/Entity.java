@@ -4,8 +4,8 @@ import java.awt.Rectangle;
 
 public abstract class Entity {
     public int x, y, height, width;
-    protected int hpLevel;
-    protected int maxHP;
+    protected int hpLevel = 1000;
+    protected int maxHP = 1000;
 
     public abstract Rectangle getBound();
 
@@ -19,14 +19,15 @@ public abstract class Entity {
     }
 
     public int getHP(){
-        return hpLevel;
+        return this.hpLevel;
     }
 
     public  void increaseHP(int heal){
         this.hpLevel += heal;
     }
 
-    public void decreaseHP(int attack){
+    public boolean decreaseHP(int attack){
         this.hpLevel -= attack;
+        return true;
     }
 }

@@ -1,7 +1,9 @@
 package main;
 
+import Screen.LoseScreen;
 import Screen.TitleScreen;
 import Screen.UpgradeScreen;
+import Screen.WinScreen;
 
 import java.awt.*;
 import javax.swing.*;
@@ -9,6 +11,7 @@ import javax.swing.*;
 public class App {
 
     public static void main(String[] args) throws Exception {
+
         final int PANEL_WIDTH = 960;
         final int PANEL_HEIGHT = 780;
         JFrame screen = new JFrame();
@@ -24,6 +27,8 @@ public class App {
         mainPanel.add(new TitleScreen(cardLayout, mainPanel), "titleScreen");
         mainPanel.add(new UpgradeScreen(cardLayout, mainPanel,game.getPlayer()), "upgradeScreen");
         mainPanel.add(game, "gameScreen");
+        mainPanel.add(new WinScreen(cardLayout, mainPanel),"winScreen");
+        mainPanel.add(new LoseScreen(cardLayout, mainPanel),"loseScreen");
 
         screen.add(mainPanel);
         screen.setVisible(true);

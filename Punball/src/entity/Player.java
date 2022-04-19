@@ -1,6 +1,7 @@
 package entity;
 
 import javax.imageio.ImageIO;
+import javax.swing.JProgressBar;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -22,6 +23,8 @@ public class Player extends Entity{
     Game game;
     MouseClick mC;
 
+    JProgressBar playerHealthBar;
+
     public Player(Game g, KeyHandler k, MouseClick mC) {
         x = 480;
         y = 665;
@@ -31,8 +34,22 @@ public class Player extends Entity{
         this.mC = mC;
         dir = "stand";
 
+        playerHealthBar = new JProgressBar();
+        playerHealthBar.setValue(100);
+        playerHealthBar.setStringPainted(true);
+        // playerHealthBar.setString(String.valueOf(super.getHP()));
+        playerHealthBar.setBounds(300, 725, 360, 30);
+        playerHealthBar.setForeground(Color.red);
+        playerHealthBar.setBackground(Color.white);
+
         getPlayer();
     }
+
+    public JProgressBar getPlayerHealthBar(){
+        return playerHealthBar;
+    }
+
+
 
     public void getPlayer() {
         try {
@@ -106,22 +123,27 @@ public class Player extends Entity{
         }
 
         g2.drawImage(image, null, x, y);
-        g2.setPaint(Color.red);
-        g2.fillRect(300, 725, 360, 25);   
-        g2.drawString(String.valueOf(super.getHP()), 350, 700);
+        // g2.setPaint(Color.red);
+        // g2.fillRect(300, 725, 360, 15);   
+        // g2.drawString("Player's HP : "+String.valueOf(super.getHP()), 450, 755);
     }
 
     @Override
-    public void decreaseHP(int attack){
+    public boolean decreaseHP(int attack){
         this.hpLevel -= attack;
-        
+        playerHealthBar.setValue((int) calculateBarHP(attack));
+        playerHealthBar.setString(String.valueOf(super.getHP()));
+        if (super.getHP() <= 0){
+            this.hpLevel=super.maxHP;
+            return false;
+        }
+        return true;
     }
 
 
-    public float calculateBarHP(int attack){
-        super.decreaseHP(attack);
+    public double calculateBarHP(int attack){
         int hp = super.getHP();
-        float ans = 360 - (((hp-attack)/ (float) maxHP)*360);
+        double ans = (((hp)/ (double) getMaxHP())*100);
         return ans;
     }
 

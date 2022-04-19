@@ -27,11 +27,17 @@ public class LoseScreen extends JPanel implements ActionListener {
         Icon iconTryAgain = new ImageIcon("imgs/TryAgainButton.png");
         buttonTryAgain = new JButton(iconTryAgain);
         buttonTryAgain.setBounds(328, 395, 300, 95);
+        buttonTryAgain.setOpaque(false);
+        buttonTryAgain.setBorderPainted(false);
+        buttonTryAgain.setContentAreaFilled(false);
         buttonTryAgain.addActionListener(this);
 
         Icon iconQuit = new ImageIcon("imgs/QuitButton.png");
         buttonQuit = new JButton(iconQuit);
         buttonQuit.setBounds(328, 500, 300, 95);
+        buttonQuit.setOpaque(false);
+        buttonQuit.setBorderPainted(false);
+        buttonQuit.setContentAreaFilled(false);
         buttonQuit.addActionListener(this);
         
         this.add(buttonTryAgain);
@@ -46,6 +52,7 @@ public class LoseScreen extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == buttonTryAgain) {
             cardLayout.show(mainPanel, "gameScreen");
+
         }
 
         if (e.getSource() == buttonQuit) {

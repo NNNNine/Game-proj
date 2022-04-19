@@ -29,18 +29,18 @@ public class TitleScreen extends JPanel implements ActionListener {
         Icon iconStart = new ImageIcon("imgs/StartButton.png");
         buttonStart = new JButton(iconStart);
         buttonStart.setBounds(328, 395, 300, 95);
+        buttonStart.setOpaque(false);
+        buttonStart.setBorderPainted(false);
+        buttonStart.setContentAreaFilled(false);
         buttonStart.addActionListener(this);
 
         Icon iconUpgrade = new ImageIcon("imgs/UpgradeButton.png");
         buttonUpgrade = new JButton(iconUpgrade);
         buttonUpgrade.setBounds(328, 500, 300, 95);
+        buttonUpgrade.setOpaque(false);
+        buttonUpgrade.setBorderPainted(false);
+        buttonUpgrade.setContentAreaFilled(false);
         buttonUpgrade.addActionListener(this);
-
-        // mainPanel = new JPanel();
-        // mainPanel.setLayout(cardLayout);
-        // mainPanel.setBounds(0,0,PANEL_WIDTH,PANEL_HEIGHT);
-        // mainPanel.add(Game,"game");
-        // mainPanel.add(UpgradeScreen,"upgradeScreen");
         
         this.add(buttonStart);
         this.add(buttonUpgrade);

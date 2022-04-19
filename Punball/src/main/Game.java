@@ -8,7 +8,9 @@ import map.RandomMap;
 import entity.*;
 
 import java.awt.*;
-import javax.swing.JPanel;
+
+import javax.swing.*;
+
 
 public class Game extends JPanel implements Runnable{
     
@@ -36,6 +38,8 @@ public class Game extends JPanel implements Runnable{
     private CardLayout cardLayout;
     private JPanel mainPanel;
 
+    JButton buttonTest;
+
     Thread gameThread;
 
     public Game(CardLayout cardLayout,JPanel mainPanel) {
@@ -43,11 +47,29 @@ public class Game extends JPanel implements Runnable{
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
 
+        Icon iconUpgrade = new ImageIcon("imgs/UpgradeButton.png");
+        buttonTest = new JButton(iconUpgrade);
+        buttonTest.setBounds(328, 500, 300, 95);
+        buttonTest.addActionListener(e -> {
+            if(!player.decreaseHP(300)){
+                cardLayout.show(mainPanel, "loseScreen");
+            }
+            System.out.println(player.getHP());
+        });
+        
+
+
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-        this.setBackground(Color.BLACK);
+        this.setLayout(null);
+        
+        this.add(buttonTest);
+        this.add(player.getPlayerHealthBar());
+        this.add(new GamePanelPaint(enemy,player,map));
         this.setDoubleBuffered(true);
         this.addKeyListener(KeyH);
         this.setFocusable(true);
+
+
     }
 
     public Player getPlayer(){
@@ -95,15 +117,14 @@ public class Game extends JPanel implements Runnable{
         player.update();
     }
 
-    public void paint(Graphics g) {
-        super.paint(g);
-        Graphics2D g2d = (Graphics2D) g;
+    // public void paint(Graphics g) {
+    //     super.paint(g);
+    //     Graphics2D g2d = (Graphics2D) g;
 
-        map.draw(g2d);
-        player.draw(g2d);
-        enemy.draw(g2d);
-        
+    //     map.draw(g2d);
+    //     player.draw(g2d);
+    //     enemy.draw(g2d);
 
-        g2d.dispose();
-    }
+    //     g2d.dispose();
+    // }
 }

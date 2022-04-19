@@ -42,6 +42,9 @@ public class UpgradeScreen extends JPanel implements ActionListener {
         Icon iconStart = new ImageIcon("imgs/StartButton.png");
         buttonStartUp = new JButton(iconStart);
         buttonStartUp.setBounds(328, 660, 300, 95);
+        buttonStartUp.setOpaque(false);
+        buttonStartUp.setBorderPainted(false);
+        buttonStartUp.setContentAreaFilled(false);
         buttonStartUp.addActionListener(this);
 
         Icon iconDamage200 = new ImageIcon("imgs/damage200button.png");
@@ -166,7 +169,7 @@ public class UpgradeScreen extends JPanel implements ActionListener {
 
             if (e.getSource() == damage200button) {
                 damage200button.setIcon(new ImageIcon("imgs/usedDamage200button.png"));
-
+                
             } else if (e.getSource() == damage400button) {
                 damage400button.setIcon(new ImageIcon("imgs/usedDamage400button.png"));
 
