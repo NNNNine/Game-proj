@@ -6,8 +6,11 @@ import java.awt.*;
 
 public class Enemy extends Entity {
     private int health;
+    private int maxHealth;
     private Image image;
     public String chooseEnemy;
+
+    private JProgressBar enemyHealthBar;
 
     public static String[] allEnemy = {
             "imgs/monsterYellows.png", "imgs/monsterReds.png", "imgs/monsterBlues.png", "imgs/monsterGreens.png",
@@ -18,12 +21,25 @@ public class Enemy extends Entity {
         Random r = new Random();
         int temp_h = r.nextInt(10);
         health = temp_h * 1000;
+        maxHealth=health;
 
         int temp_enemy = r.nextInt(5);
         chooseEnemy = allEnemy[temp_enemy];
 
         x = 440;
         y = 270;
+
+        enemyHealthBar = new JProgressBar();
+        enemyHealthBar.setValue(100);
+        enemyHealthBar.setStringPainted(true);
+        // enemyHealthBar.setString(String.valueOf(getHealth()));
+        enemyHealthBar.setBounds(440, 245, 120, 15);
+        enemyHealthBar.setForeground(Color.red);
+        enemyHealthBar.setBackground(Color.white);
+    }
+
+    public JProgressBar getEnemyHealthBar(){
+        return enemyHealthBar;
     }
 
     public void update() {
@@ -34,13 +50,32 @@ public class Enemy extends Entity {
         return health;
     }
 
+    @Override
+    public boolean decreaseHP(int attack){
+        this.health -= attack;
+        enemyHealthBar.setValue((int) calculateBarHP(attack));
+        enemyHealthBar.setString(String.valueOf(getHealth()));
+        if (getHealth() <= 0){
+            // this.hpLevel=super.maxHP;
+            return false;
+        }
+        return true;
+    }
+
+
+    public double calculateBarHP(int attack){
+        int hp = getHealth();
+        double ans = (((hp)/ (double) this.maxHealth)*100);
+        return ans;
+    }
+
     public void draw(Graphics2D g2) {
         image = new ImageIcon(chooseEnemy).getImage();
         g2.drawImage(image, x, y, null);
 
-        g2.setPaint(Color.DARK_GRAY);
-        g2.fillRect(440, 245, 120, 15);   
-        g2.drawString("Monster's HP : "+String.valueOf(health),440 , 235);
+        // g2.setPaint(Color.DARK_GRAY);
+        // g2.fillRect(440, 245, 120, 15);   
+        // g2.drawString("Monster's HP : "+String.valueOf(health),440 , 235);
         // g2.setColor(Color.red);
         // g2.fillRect(x, y, 120, 120);
     }

@@ -49,8 +49,6 @@ public class Player extends Entity{
         return playerHealthBar;
     }
 
-
-
     public void getPlayer() {
         try {
             left1 = ImageIO.read(getClass().getResourceAsStream("res/player_left_1.png"));
@@ -134,7 +132,7 @@ public class Player extends Entity{
         playerHealthBar.setValue((int) calculateBarHP(attack));
         playerHealthBar.setString(String.valueOf(super.getHP()));
         if (super.getHP() <= 0){
-            this.hpLevel=super.maxHP;
+            // this.hpLevel=super.maxHP;
             return false;
         }
         return true;

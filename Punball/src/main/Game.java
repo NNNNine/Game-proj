@@ -39,6 +39,7 @@ public class Game extends JPanel implements Runnable{
     private JPanel mainPanel;
 
     JButton buttonTest;
+    JButton buttonTest2;
 
     Thread gameThread;
 
@@ -47,23 +48,36 @@ public class Game extends JPanel implements Runnable{
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
 
+        //Button test as a ball attack player
         Icon iconUpgrade = new ImageIcon("imgs/UpgradeButton.png");
         buttonTest = new JButton(iconUpgrade);
-        buttonTest.setBounds(328, 500, 300, 95);
+        buttonTest.setBounds(0, 0, 300, 95);
         buttonTest.addActionListener(e -> {
             if(!player.decreaseHP(300)){
                 cardLayout.show(mainPanel, "loseScreen");
             }
             System.out.println(player.getHP());
         });
-        
+
+        //Button test as a ball attack enemy
+        Icon iconNext = new ImageIcon("imgs/NextButton.png");
+        buttonTest2 = new JButton(iconNext);
+        buttonTest2.setBounds(0, 115, 300, 95);
+        buttonTest2.addActionListener(e -> {
+            if(!enemy.decreaseHP(300)){
+                cardLayout.show(mainPanel, "winScreen");
+            }
+            System.out.println(enemy.getHealth());
+        });
 
 
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setLayout(null);
         
         this.add(buttonTest);
+        this.add(buttonTest2);
         this.add(player.getPlayerHealthBar());
+        this.add(enemy.getEnemyHealthBar());
         this.add(new GamePanelPaint(enemy,player,map));
         this.setDoubleBuffered(true);
         this.addKeyListener(KeyH);
