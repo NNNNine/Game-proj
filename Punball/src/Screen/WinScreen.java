@@ -4,19 +4,28 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import main.Game;
+
+// import main.Game;
+
 public class WinScreen extends JPanel implements ActionListener {
     private final int PANEL_WIDTH = 960;
     private final int PANEL_HEIGHT = 780;
+
     JButton buttonNext;
     JButton buttonQuit;
 
     private CardLayout cardLayout;
     private JPanel mainPanel;
+    private Game game;
 
-    public WinScreen(CardLayout cardLayout, JPanel mainPanel) {
+    // private Game game = new Game(cardLayout, mainPanel);
+
+    public WinScreen(CardLayout cardLayout, JPanel mainPanel,Game game) {
 
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
+        this.game = game;
 
         this.setLayout(null);
 
@@ -53,6 +62,7 @@ public class WinScreen extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == buttonNext) {
             cardLayout.show(mainPanel, "gameScreen");
+            game.restartGame(cardLayout, mainPanel);
         }
 
         if (e.getSource() == buttonQuit) {

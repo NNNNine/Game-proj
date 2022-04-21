@@ -10,8 +10,14 @@ public abstract class Entity {
     public abstract Rectangle getBound();
 
     public void setHP(int hpLevel){
-        this.hpLevel =  hpLevel;
-        this.maxHP =  hpLevel;
+        // if (hpLevel>0 ){
+            this.hpLevel =  hpLevel;
+            this.maxHP =  hpLevel;
+        // }else{
+            
+        //     System.out.println("Dead end??? must reset new game");
+
+        // }
     }
 
     public int getMaxHP(){
@@ -30,4 +36,11 @@ public abstract class Entity {
         this.hpLevel -= attack;
         return true;
     }
+
+    public double calculateBarHP(int attack){
+        int hp = getHP();
+        double ans = (((hp)/ (double) getMaxHP())*100);
+        return ans;
+    }
+    
 }

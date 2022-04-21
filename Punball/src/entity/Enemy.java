@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class Enemy extends Entity {
     private int health;
-    private int maxHealth;
+    // private int maxHealth;
     private Image image;
     public String chooseEnemy;
 
@@ -21,7 +21,7 @@ public class Enemy extends Entity {
         Random r = new Random();
         int temp_h = r.nextInt(10);
         health = temp_h * 1000;
-        maxHealth=health;
+        super.setHP(health);
 
         int temp_enemy = r.nextInt(5);
         chooseEnemy = allEnemy[temp_enemy];
@@ -46,16 +46,16 @@ public class Enemy extends Entity {
 
     }
 
-    public int getHealth(){
-        return health;
-    }
+    // public int getHealth(){
+    //     return health;
+    // }
 
     @Override
     public boolean decreaseHP(int attack){
-        this.health -= attack;
-        enemyHealthBar.setValue((int) calculateBarHP(attack));
-        enemyHealthBar.setString(String.valueOf(getHealth()));
-        if (getHealth() <= 0){
+        this.setHP(hpLevel-attack) ;
+        enemyHealthBar.setValue((int) super.calculateBarHP(attack));
+        enemyHealthBar.setString(String.valueOf(super.getHP()));
+        if (super.getHP() <= 0){
             // this.hpLevel=super.maxHP;
             return false;
         }
@@ -63,11 +63,6 @@ public class Enemy extends Entity {
     }
 
 
-    public double calculateBarHP(int attack){
-        int hp = getHealth();
-        double ans = (((hp)/ (double) this.maxHealth)*100);
-        return ans;
-    }
 
     public void draw(Graphics2D g2) {
         image = new ImageIcon(chooseEnemy).getImage();

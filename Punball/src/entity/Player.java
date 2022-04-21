@@ -128,8 +128,8 @@ public class Player extends Entity{
 
     @Override
     public boolean decreaseHP(int attack){
-        this.hpLevel -= attack;
-        playerHealthBar.setValue((int) calculateBarHP(attack));
+        this.setHP(hpLevel-attack);
+        playerHealthBar.setValue((int) super.calculateBarHP(attack));
         playerHealthBar.setString(String.valueOf(super.getHP()));
         if (super.getHP() <= 0){
             // this.hpLevel=super.maxHP;
@@ -139,11 +139,11 @@ public class Player extends Entity{
     }
 
 
-    public double calculateBarHP(int attack){
-        int hp = super.getHP();
-        double ans = (((hp)/ (double) getMaxHP())*100);
-        return ans;
-    }
+    // public double calculateBarHP(int attack){
+    //     int hp = super.getHP();
+    //     double ans = (((hp)/ (double) getMaxHP())*100);
+    //     return ans;
+    // }
 
     @Override
     public Rectangle getBound() {

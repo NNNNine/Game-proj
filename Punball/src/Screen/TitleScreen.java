@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import main.Game;
+
 public class TitleScreen extends JPanel implements ActionListener {
     private final int PANEL_WIDTH = 960;
     private final int PANEL_HEIGHT = 780;
@@ -13,12 +15,16 @@ public class TitleScreen extends JPanel implements ActionListener {
     private CardLayout cardLayout;
     private JPanel mainPanel;
 
+    private Game game;
+
     // CardLayout cardLayout;
 
-    public TitleScreen(CardLayout cardLayout, JPanel mainPanel) {
+    public TitleScreen(CardLayout cardLayout, JPanel mainPanel, Game game) {
 
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
+
+        this.game = game;
 
         this.setLayout(null);
 
@@ -54,8 +60,7 @@ public class TitleScreen extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == buttonStart) {
             cardLayout.show(mainPanel, "gameScreen");
-            System.out.println("Clicked start yay");
-
+            game.restartGame(cardLayout, mainPanel);
         }
 
         if (e.getSource() == buttonUpgrade) {

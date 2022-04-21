@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import main.Game;
+
 public class LoseScreen extends JPanel implements ActionListener {
     private final int PANEL_WIDTH = 960;
     private final int PANEL_HEIGHT = 780;
@@ -13,11 +15,13 @@ public class LoseScreen extends JPanel implements ActionListener {
     private CardLayout cardLayout;
     private JPanel mainPanel;
 
-    public LoseScreen(CardLayout cardLayout, JPanel mainPanel) {
+    private Game game;
+
+    public LoseScreen(CardLayout cardLayout, JPanel mainPanel, Game game) {
 
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
-
+        this.game = game;
         this.setLayout(null);
 
         JLabel screenImage = new JLabel();
@@ -52,7 +56,7 @@ public class LoseScreen extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == buttonTryAgain) {
             cardLayout.show(mainPanel, "gameScreen");
-
+            game.restartGame(cardLayout, mainPanel);
         }
 
         if (e.getSource() == buttonQuit) {

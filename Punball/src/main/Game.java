@@ -11,82 +11,105 @@ import java.awt.*;
 
 import javax.swing.*;
 
+public class Game extends JPanel implements Runnable {
 
-public class Game extends JPanel implements Runnable{
-    
-    //Screen Res
+    // Screen Res
     final int maxScreenCol = 16;
     final int maxScreenRow = 13;
     final int screenWidth = 960;
     final int screenHeight = 780;
 
-    //Objects
-    MouseClick m_Click = new MouseClick();
-    MouseMove m_Move = new MouseMove();
-    KeyHandler KeyH = new KeyHandler();
+    // Objects
+    MouseClick m_Click;
+    MouseMove m_Move;
+    KeyHandler KeyH;
 
-    Enemy enemy = new Enemy();
-    Player player = new Player(this, KeyH, m_Click);
-    RandomMap map = new RandomMap();
+    Enemy enemy;
+    Player player;
+    RandomMap map;
 
-    //Map-Collision
-    MapCollision1 m1 = new MapCollision1();
-    MapCollision2 m2 = new MapCollision2();
-    MapCollision3 m3 = new MapCollision3();
+    // Map-Collision
+    MapCollision1 m1;
+    MapCollision2 m2;
+    MapCollision3 m3;
 
-    //Switching page
+    // Switching page
     private CardLayout cardLayout;
     private JPanel mainPanel;
 
+    // butons test as a ball hit player/enemy on game screen
     JButton buttonTest;
     JButton buttonTest2;
 
     Thread gameThread;
 
-    public Game(CardLayout cardLayout,JPanel mainPanel) {
+    public Game(CardLayout cardLayout, JPanel mainPanel) {
+        gameInit(cardLayout, mainPanel);
+    }
 
+    public void gameInit(CardLayout cardLayout, JPanel mainPanel) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
 
-        //Button test as a ball attack player
+        // Objects
+        m_Click = new MouseClick();
+        m_Move = new MouseMove();
+        KeyH = new KeyHandler();
+
+        enemy = new Enemy();
+        player = new Player(this, KeyH, m_Click);
+        map = new RandomMap();
+
+        // Map-Collision
+        m1 = new MapCollision1();
+        m2 = new MapCollision2();
+        m3 = new MapCollision3();
+
+        // Button test as a ball attack player
         Icon iconUpgrade = new ImageIcon("imgs/UpgradeButton.png");
         buttonTest = new JButton(iconUpgrade);
         buttonTest.setBounds(0, 0, 300, 95);
         buttonTest.addActionListener(e -> {
-            if(!player.decreaseHP(300)){
+            if (!player.decreaseHP(300)) {
                 cardLayout.show(mainPanel, "loseScreen");
             }
             System.out.println(player.getHP());
         });
 
-        //Button test as a ball attack enemy
+        // Button test as a ball attack enemy
         Icon iconNext = new ImageIcon("imgs/NextButton.png");
         buttonTest2 = new JButton(iconNext);
         buttonTest2.setBounds(0, 115, 300, 95);
         buttonTest2.addActionListener(e -> {
-            if(!enemy.decreaseHP(300)){
+            if (!enemy.decreaseHP(300)) {
                 cardLayout.show(mainPanel, "winScreen");
             }
-            System.out.println(enemy.getHealth());
+            System.out.println(enemy.getHP());
         });
-
 
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setLayout(null);
-        
+
         this.add(buttonTest);
         this.add(buttonTest2);
+
         this.add(player.getPlayerHealthBar());
         this.add(enemy.getEnemyHealthBar());
-        this.add(new GamePanelPaint(enemy,player,map));
+        this.add(new GamePanelPaint(enemy, player, map));
         this.setDoubleBuffered(true);
         this.addKeyListener(KeyH);
         this.setFocusable(true);
-
-
     }
 
-    public Player getPlayer(){
+    public void restartGame(CardLayout cardLayout, JPanel mainPanel) {
+        this.removeAll(); // remove all components from panel but not completely destroy
+        this.revalidate(); // after remove, put back objects~~
+        this.repaint();
+        System.gc(); // คือการทำบาย objects ที่ไม่ได้ใช้แล้ว ไม่ให้เปลืองความจำ
+        gameInit(cardLayout, mainPanel);
+    }
+
+    public Player getPlayer() {
         return player;
     }
 
@@ -94,16 +117,17 @@ public class Game extends JPanel implements Runnable{
         gameThread = new Thread(this);
         gameThread.start();
     }
-    
-    //FPS
+
+    // FPS
     final int FPS = 60;
+
     @Override
     public void run() {
-        
-        double drawInterval = 1000000000/FPS;
+
+        double drawInterval = 1000000000 / FPS;
         double nextDrawTime = System.nanoTime() + drawInterval;
 
-        while(gameThread != null) {
+        while (gameThread != null) {
 
             update();
 
@@ -113,7 +137,7 @@ public class Game extends JPanel implements Runnable{
                 double remainingTime = nextDrawTime - System.nanoTime();
                 remainingTime /= 1000000;
 
-                if(remainingTime < 0) {
+                if (remainingTime < 0) {
                     remainingTime = 0;
                 }
 
@@ -131,14 +155,4 @@ public class Game extends JPanel implements Runnable{
         player.update();
     }
 
-    // public void paint(Graphics g) {
-    //     super.paint(g);
-    //     Graphics2D g2d = (Graphics2D) g;
-
-    //     map.draw(g2d);
-    //     player.draw(g2d);
-    //     enemy.draw(g2d);
-
-    //     g2d.dispose();
-    // }
 }
