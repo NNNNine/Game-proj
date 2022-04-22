@@ -121,9 +121,6 @@ public class Player extends Entity{
         }
 
         g2.drawImage(image, null, x, y);
-        // g2.setPaint(Color.red);
-        // g2.fillRect(300, 725, 360, 15);   
-        // g2.drawString("Player's HP : "+String.valueOf(super.getHP()), 450, 755);
     }
 
     @Override
@@ -137,13 +134,6 @@ public class Player extends Entity{
         }
         return true;
     }
-
-
-    // public double calculateBarHP(int attack){
-    //     int hp = super.getHP();
-    //     double ans = (((hp)/ (double) getMaxHP())*100);
-    //     return ans;
-    // }
 
     @Override
     public Rectangle getBound() {

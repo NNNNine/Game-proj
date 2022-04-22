@@ -169,18 +169,23 @@ public class UpgradeScreen extends JPanel implements ActionListener {
 
             if (e.getSource() == damage200button) {
                 damage200button.setIcon(new ImageIcon("imgs/usedDamage200button.png"));
+                player.setAttack(200);
                 
             } else if (e.getSource() == damage400button) {
                 damage400button.setIcon(new ImageIcon("imgs/usedDamage400button.png"));
+                player.setAttack(400);
 
             } else if (e.getSource() == damage600button) {
                 damage600button.setIcon(new ImageIcon("imgs/usedDamage600button.png"));
+                player.setAttack(600);
 
             } else if (e.getSource() == damage800button) {
                 damage800button.setIcon(new ImageIcon("imgs/usedDamage800button.png"));
+                player.setAttack(800);
 
             } else if (e.getSource() == damage1000button) {
                 damage1000button.setIcon(new ImageIcon("imgs/usedDamage1000button.png"));
+                player.setAttack(1000);
 
             }
         }

@@ -20,7 +20,7 @@ public class Enemy extends Entity {
     public Enemy() {
         Random r = new Random();
         int temp_h = r.nextInt(10);
-        health = temp_h * 1000;
+        health = temp_h * 5000;
         super.setHP(health);
 
         int temp_enemy = r.nextInt(5);
