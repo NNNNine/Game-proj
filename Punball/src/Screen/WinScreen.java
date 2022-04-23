@@ -6,8 +6,6 @@ import javax.swing.*;
 
 import main.Game;
 
-// import main.Game;
-
 public class WinScreen extends JPanel implements ActionListener {
     private final int PANEL_WIDTH = 960;
     private final int PANEL_HEIGHT = 780;

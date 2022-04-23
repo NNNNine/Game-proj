@@ -45,6 +45,29 @@ public class Player extends Entity{
         getPlayer();
     }
 
+    // Overloaded  constructor for upgrade screen
+    public Player(Game g, KeyHandler k, MouseClick mC,int hpLevel) {
+        x = 480;
+        y = 665;
+        playerSpeed = 3;
+        game = g;
+        keyH = k;
+        this.mC = mC;
+        dir = "stand";
+
+        setHP(hpLevel);
+
+        playerHealthBar = new JProgressBar();
+        playerHealthBar.setValue(100);
+        playerHealthBar.setStringPainted(true);
+        // playerHealthBar.setString(String.valueOf(super.getHP()));
+        playerHealthBar.setBounds(300, 725, 360, 30);
+        playerHealthBar.setForeground(Color.red);
+        playerHealthBar.setBackground(Color.white);
+
+        getPlayer();
+    }
+
     public JProgressBar getPlayerHealthBar(){
         return playerHealthBar;
     }
@@ -125,7 +148,7 @@ public class Player extends Entity{
 
     @Override
     public boolean decreaseHP(int attack){
-        this.setHP(hpLevel-attack);
+        hpLevel -= attack;
         playerHealthBar.setValue((int) super.calculateBarHP(attack));
         playerHealthBar.setString(String.valueOf(super.getHP()));
         if (super.getHP() <= 0){

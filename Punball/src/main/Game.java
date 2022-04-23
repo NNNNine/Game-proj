@@ -47,6 +47,10 @@ public class Game extends JPanel implements Runnable {
         gameInit(cardLayout, mainPanel);
     }
 
+    public Game(CardLayout cardLayout, JPanel mainPanel,int hpLevel) {
+        gameInit(cardLayout, mainPanel,hpLevel);
+    }
+
     public void gameInit(CardLayout cardLayout, JPanel mainPanel) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
@@ -101,12 +105,78 @@ public class Game extends JPanel implements Runnable {
         this.setFocusable(true);
     }
 
+    // Overloaded method for upgrade screen
+    public void gameInit(CardLayout cardLayout, JPanel mainPanel,int hpLevel) {
+        this.cardLayout = cardLayout;
+        this.mainPanel = mainPanel;
+        
+        // Objects
+        m_Click = new MouseClick();
+        m_Move = new MouseMove();
+        KeyH = new KeyHandler();
+
+        enemy = new Enemy();
+        player = new Player(this, KeyH, m_Click,hpLevel);
+        map = new RandomMap();
+
+        // Map-Collision
+        m1 = new MapCollision1();
+        m2 = new MapCollision2();
+        m3 = new MapCollision3();
+
+        // Button test as a ball attack player
+        Icon iconUpgrade = new ImageIcon("imgs/UpgradeButton.png");
+        buttonTest = new JButton(iconUpgrade);
+        buttonTest.setBounds(0, 0, 300, 95);
+        buttonTest.addActionListener(e -> {
+            if (!player.decreaseHP(300)) {
+                cardLayout.show(mainPanel, "loseScreen");
+            }
+            System.out.println(player.getHP());
+        });
+
+        // Button test as a ball attack enemy
+        Icon iconNext = new ImageIcon("imgs/NextButton.png");
+        buttonTest2 = new JButton(iconNext);
+        buttonTest2.setBounds(0, 115, 300, 95);
+        buttonTest2.addActionListener(e -> {
+            if (!enemy.decreaseHP(300)) {
+                cardLayout.show(mainPanel, "winScreen");
+            }
+            System.out.println(enemy.getHP());
+        });
+
+        this.setPreferredSize(new Dimension(screenWidth, screenHeight));
+        this.setLayout(null);
+
+        this.add(buttonTest);
+        this.add(buttonTest2);
+
+        this.add(player.getPlayerHealthBar());
+        this.add(enemy.getEnemyHealthBar());
+        this.add(new GamePanelPaint(enemy, player, map));
+        this.setDoubleBuffered(true);
+        this.addKeyListener(KeyH);
+        this.setFocusable(true);
+    }
+
+
     public void restartGame(CardLayout cardLayout, JPanel mainPanel) {
         this.removeAll(); // remove all components from panel but not completely destroy
         this.revalidate(); // after remove, put back objects~~
         this.repaint();
         System.gc(); // คือการทำบาย objects ที่ไม่ได้ใช้แล้ว ไม่ให้เปลืองความจำ
         gameInit(cardLayout, mainPanel);
+    }
+
+    // Overloaded method for upgrade screen
+    public void restartGame(CardLayout cardLayout, JPanel mainPanel, int hpLevel) {
+        this.removeAll(); 
+        this.revalidate(); 
+        this.repaint();
+        System.gc(); 
+        System.out.println(hpLevel);
+        gameInit(cardLayout, mainPanel,hpLevel);
     }
 
     public Player getPlayer() {

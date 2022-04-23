@@ -52,7 +52,7 @@ public class Enemy extends Entity {
 
     @Override
     public boolean decreaseHP(int attack){
-        this.setHP(hpLevel-attack) ;
+        hpLevel -= attack;
         enemyHealthBar.setValue((int) super.calculateBarHP(attack));
         enemyHealthBar.setString(String.valueOf(super.getHP()));
         if (super.getHP() <= 0){

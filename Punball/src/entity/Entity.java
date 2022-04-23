@@ -11,14 +11,8 @@ public abstract class Entity {
     public abstract Rectangle getBound();
 
     public void setHP(int hpLevel){
-        // if (hpLevel>0 ){
             this.hpLevel =  hpLevel;
             this.maxHP =  hpLevel;
-        // }else{
-            
-        //     System.out.println("Dead end??? must reset new game");
-
-        // }
     }
 
     public int getMaxHP(){
