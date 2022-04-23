@@ -43,7 +43,7 @@ public abstract class Entity {
     }
 
     public int getAttack(){
-            return this.attack;
+        return this.attack;
         
     }
     
