@@ -6,7 +6,7 @@ public abstract class Entity {
     public int x, y, height, width;
     protected int hpLevel = 1000;
     protected int maxHP = 1000;
-    private int attack;
+    private int attack = 200;
 
     public abstract Rectangle getBound();
 

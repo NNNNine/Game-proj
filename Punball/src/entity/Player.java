@@ -46,7 +46,7 @@ public class Player extends Entity{
     }
 
     // Overloaded  constructor for upgrade screen
-    public Player(Game g, KeyHandler k, MouseClick mC,int hpLevel) {
+    public Player(Game g, KeyHandler k, MouseClick mC,int hpLevel,int attack) {
         x = 480;
         y = 665;
         playerSpeed = 3;
@@ -56,6 +56,7 @@ public class Player extends Entity{
         dir = "stand";
 
         setHP(hpLevel);
+        setAttack(attack);
 
         playerHealthBar = new JProgressBar();
         playerHealthBar.setValue(100);

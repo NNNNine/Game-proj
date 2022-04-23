@@ -6,7 +6,6 @@ import java.awt.*;
 
 public class Enemy extends Entity {
     private int health;
-    // private int maxHealth;
     private Image image;
     public String chooseEnemy;
 
@@ -46,17 +45,12 @@ public class Enemy extends Entity {
 
     }
 
-    // public int getHealth(){
-    //     return health;
-    // }
-
     @Override
     public boolean decreaseHP(int attack){
         hpLevel -= attack;
         enemyHealthBar.setValue((int) super.calculateBarHP(attack));
         enemyHealthBar.setString(String.valueOf(super.getHP()));
         if (super.getHP() <= 0){
-            // this.hpLevel=super.maxHP;
             return false;
         }
         return true;
@@ -67,12 +61,6 @@ public class Enemy extends Entity {
     public void draw(Graphics2D g2) {
         image = new ImageIcon(chooseEnemy).getImage();
         g2.drawImage(image, x, y, null);
-
-        // g2.setPaint(Color.DARK_GRAY);
-        // g2.fillRect(440, 245, 120, 15);   
-        // g2.drawString("Monster's HP : "+String.valueOf(health),440 , 235);
-        // g2.setColor(Color.red);
-        // g2.fillRect(x, y, 120, 120);
     }
 
     public Rectangle getBound() {

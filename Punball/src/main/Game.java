@@ -47,8 +47,8 @@ public class Game extends JPanel implements Runnable {
         gameInit(cardLayout, mainPanel);
     }
 
-    public Game(CardLayout cardLayout, JPanel mainPanel,int hpLevel) {
-        gameInit(cardLayout, mainPanel,hpLevel);
+    public Game(CardLayout cardLayout, JPanel mainPanel,int hpLevel,int attack) {
+        gameInit(cardLayout, mainPanel,hpLevel,attack);
     }
 
     public void gameInit(CardLayout cardLayout, JPanel mainPanel) {
@@ -106,7 +106,7 @@ public class Game extends JPanel implements Runnable {
     }
 
     // Overloaded method for upgrade screen
-    public void gameInit(CardLayout cardLayout, JPanel mainPanel,int hpLevel) {
+    public void gameInit(CardLayout cardLayout, JPanel mainPanel,int hpLevel,int attack) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
         
@@ -116,7 +116,7 @@ public class Game extends JPanel implements Runnable {
         KeyH = new KeyHandler();
 
         enemy = new Enemy();
-        player = new Player(this, KeyH, m_Click,hpLevel);
+        player = new Player(this, KeyH, m_Click,hpLevel,attack);
         map = new RandomMap();
 
         // Map-Collision
@@ -170,13 +170,13 @@ public class Game extends JPanel implements Runnable {
     }
 
     // Overloaded method for upgrade screen
-    public void restartGame(CardLayout cardLayout, JPanel mainPanel, int hpLevel) {
+    public void restartGame(CardLayout cardLayout, JPanel mainPanel, int hpLevel,int attack) {
         this.removeAll(); 
         this.revalidate(); 
         this.repaint();
         System.gc(); 
         System.out.println(hpLevel);
-        gameInit(cardLayout, mainPanel,hpLevel);
+        gameInit(cardLayout, mainPanel,hpLevel,attack);
     }
 
     public Player getPlayer() {

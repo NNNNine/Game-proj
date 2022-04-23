@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import org.w3c.dom.Attr;
+
 import main.Game;
 
 public class WinScreen extends JPanel implements ActionListener {
@@ -16,8 +18,6 @@ public class WinScreen extends JPanel implements ActionListener {
     private CardLayout cardLayout;
     private JPanel mainPanel;
     private Game game;
-
-    // private Game game = new Game(cardLayout, mainPanel);
 
     public WinScreen(CardLayout cardLayout, JPanel mainPanel,Game game) {
 
@@ -60,7 +60,10 @@ public class WinScreen extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == buttonNext) {
             cardLayout.show(mainPanel, "gameScreen");
-            game.restartGame(cardLayout, mainPanel);
+            int hpLevel = game.getPlayer().getMaxHP();
+            int attack = game.getPlayer().getAttack();
+            System.out.println(hpLevel);
+            game.restartGame(cardLayout, mainPanel,hpLevel,attack);
         }
 
         if (e.getSource() == buttonQuit) {

@@ -185,8 +185,8 @@ public class UpgradeScreen extends JPanel implements ActionListener {
             }
         } else if (e.getSource() == buttonStartUp) {
             cardLayout.show(mainPanel, "gameScreen");
-            game.restartGame(cardLayout, mainPanel,hpLevel);
-            System.out.println(hpLevel);
+            game.restartGame(cardLayout, mainPanel,hpLevel,attack);
+            System.out.println("HP : "+hpLevel);
         }
 
     }

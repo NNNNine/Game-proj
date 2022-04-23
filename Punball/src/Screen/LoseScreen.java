@@ -57,8 +57,9 @@ public class LoseScreen extends JPanel implements ActionListener {
         if (e.getSource() == buttonTryAgain) {
             cardLayout.show(mainPanel, "gameScreen");
             int hpLevel = game.getPlayer().getMaxHP();
+            int attack = game.getPlayer().getAttack();
             System.out.println(hpLevel);
-            game.restartGame(cardLayout, mainPanel,hpLevel);
+            game.restartGame(cardLayout, mainPanel,hpLevel,attack);
         }
 
         if (e.getSource() == buttonQuit) {
