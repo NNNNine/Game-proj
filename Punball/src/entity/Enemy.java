@@ -2,6 +2,9 @@ package entity;
 
 import java.util.Random;
 import javax.swing.*;
+
+import main.ID;
+
 import java.awt.*;
 
 public class Enemy extends Entity {
@@ -17,6 +20,7 @@ public class Enemy extends Entity {
     };
 
     public Enemy() {
+        super(440, 270, ID.Enemy);
         Random r = new Random();
         int temp_h = r.nextInt(10);
         health = temp_h * 5000;
@@ -37,7 +41,7 @@ public class Enemy extends Entity {
         enemyHealthBar.setBackground(Color.white);
     }
 
-    public JProgressBar getEnemyHealthBar(){
+    public JProgressBar getEnemyHealthBar() {
         return enemyHealthBar;
     }
 
@@ -46,17 +50,15 @@ public class Enemy extends Entity {
     }
 
     @Override
-    public boolean decreaseHP(int attack){
+    public boolean decreaseHP(int attack) {
         hpLevel -= attack;
         enemyHealthBar.setValue((int) super.calculateBarHP(attack));
         enemyHealthBar.setString(String.valueOf(super.getHP()));
-        if (super.getHP() <= 0){
+        if (super.getHP() <= 0) {
             return false;
         }
         return true;
     }
-
-
 
     public void draw(Graphics2D g2) {
         image = new ImageIcon(chooseEnemy).getImage();
@@ -65,5 +67,11 @@ public class Enemy extends Entity {
 
     public Rectangle getBound() {
         return new Rectangle(x, y, 120, 120);
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        // TODO Auto-generated method stub
+
     }
 }

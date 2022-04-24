@@ -1,8 +1,6 @@
 package main;
 
-import map.MapCollision1;
-import map.MapCollision2;
-import map.MapCollision3;
+import map.Map;
 import map.RandomMap;
 
 import entity.*;
@@ -20,18 +18,14 @@ public class Game extends JPanel implements Runnable {
     final int screenHeight = 780;
 
     // Objects
-    MouseClick m_Click;
-    MouseMove m_Move;
+    ObjectHandler handler;
+    // MouseClick m_Click;
+    // MouseMove m_Move;
     KeyHandler KeyH;
 
     Enemy enemy;
     Player player;
     RandomMap map;
-
-    // Map-Collision
-    MapCollision1 m1;
-    MapCollision2 m2;
-    MapCollision3 m3;
 
     // Switching page
     private CardLayout cardLayout;
@@ -47,8 +41,8 @@ public class Game extends JPanel implements Runnable {
         gameInit(cardLayout, mainPanel);
     }
 
-    public Game(CardLayout cardLayout, JPanel mainPanel,int hpLevel,int attack) {
-        gameInit(cardLayout, mainPanel,hpLevel,attack);
+    public Game(CardLayout cardLayout, JPanel mainPanel, int hpLevel, int attack) {
+        gameInit(cardLayout, mainPanel, hpLevel, attack);
     }
 
     public void gameInit(CardLayout cardLayout, JPanel mainPanel) {
@@ -56,18 +50,22 @@ public class Game extends JPanel implements Runnable {
         this.mainPanel = mainPanel;
 
         // Objects
-        m_Click = new MouseClick();
-        m_Move = new MouseMove();
+        handler = new ObjectHandler();
+
+        // m_Click = new MouseClick();
+        // m_Move = new MouseMove();
         KeyH = new KeyHandler();
+        player = new Player(this, KeyH, handler);
+        handler.addObject(player);
 
         enemy = new Enemy();
-        player = new Player(this, KeyH, m_Click);
-        map = new RandomMap();
 
-        // Map-Collision
-        m1 = new MapCollision1();
-        m2 = new MapCollision2();
-        m3 = new MapCollision3();
+        // Map-Objects
+        handler.addObject(new Map(0, 180, 300, 540));
+        handler.addObject(new Map(0, 0, 960, 180));
+        handler.addObject(new Map(659, 180, 300, 540));
+
+        map = new RandomMap();
 
         // Button test as a ball attack player
         Icon iconUpgrade = new ImageIcon("imgs/UpgradeButton.png");
@@ -106,23 +104,26 @@ public class Game extends JPanel implements Runnable {
     }
 
     // Overloaded method for upgrade screen
-    public void gameInit(CardLayout cardLayout, JPanel mainPanel,int hpLevel,int attack) {
+    public void gameInit(CardLayout cardLayout, JPanel mainPanel, int hpLevel, int attack) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
-        
+
         // Objects
-        m_Click = new MouseClick();
-        m_Move = new MouseMove();
+        handler = new ObjectHandler();
+
+        // m_Click = new MouseClick();
+        // m_Move = new MouseMove();
         KeyH = new KeyHandler();
+        player = new Player(this, KeyH, handler);
+        handler.addObject(player);
+
+        // Map-Objects
+        handler.addObject(new Map(0, 180, 300, 540));
+        handler.addObject(new Map(0, 0, 960, 180));
+        handler.addObject(new Map(659, 180, 300, 540));
 
         enemy = new Enemy();
-        player = new Player(this, KeyH, m_Click,hpLevel,attack);
         map = new RandomMap();
-
-        // Map-Collision
-        m1 = new MapCollision1();
-        m2 = new MapCollision2();
-        m3 = new MapCollision3();
 
         // Button test as a ball attack player
         Icon iconUpgrade = new ImageIcon("imgs/UpgradeButton.png");
@@ -159,7 +160,6 @@ public class Game extends JPanel implements Runnable {
         this.addKeyListener(KeyH);
         this.setFocusable(true);
     }
-
 
     public void restartGame(CardLayout cardLayout, JPanel mainPanel) {
         this.removeAll(); // remove all components from panel but not completely destroy
@@ -170,13 +170,13 @@ public class Game extends JPanel implements Runnable {
     }
 
     // Overloaded method for upgrade screen
-    public void restartGame(CardLayout cardLayout, JPanel mainPanel, int hpLevel,int attack) {
-        this.removeAll(); 
-        this.revalidate(); 
+    public void restartGame(CardLayout cardLayout, JPanel mainPanel, int hpLevel, int attack) {
+        this.removeAll();
+        this.revalidate();
         this.repaint();
-        System.gc(); 
+        System.gc();
         System.out.println(hpLevel);
-        gameInit(cardLayout, mainPanel,hpLevel,attack);
+        gameInit(cardLayout, mainPanel, hpLevel, attack);
     }
 
     public Player getPlayer() {
