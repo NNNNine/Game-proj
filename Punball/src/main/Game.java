@@ -114,7 +114,7 @@ public class Game extends JPanel implements Runnable {
         // m_Click = new MouseClick();
         // m_Move = new MouseMove();
         KeyH = new KeyHandler();
-        player = new Player(this, KeyH, handler);
+        player = new Player(this, KeyH, handler,hpLevel,attack);
         handler.addObject(player);
 
         // Map-Objects

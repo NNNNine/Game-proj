@@ -65,7 +65,6 @@ public class TitleScreen extends JPanel implements ActionListener {
 
         if (e.getSource() == buttonUpgrade) {
             cardLayout.show(mainPanel, "upgradeScreen");
-            //game.restartGame(cardLayout, mainPanel);
         }
 
     }
