@@ -9,37 +9,29 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.logging.Handler;
 
 import main.Game;
 import main.KeyHandler;
-import main.ObjectHandler;
-import main.GameObject;
 import main.ID;
 
 public class Player extends Entity {
 
-    public final int playerSpeed;
+    public int playerSpeed;
+    private int x, y;
     public BufferedImage left1, left2, right1, right2, stand;
     public String dir;
     public int animation = 1, ani_co = 0;
 
-    ObjectHandler handler;
     KeyHandler keyH;
     Game game;
-    // MouseClick mC;
 
     JProgressBar playerHealthBar;
 
-    public Player(Game g, KeyHandler k, ObjectHandler handler) {
-        super(480, 665, ID.Player);
-        x = 480;
-        y = 665;
-        this.handler = handler;
-        playerSpeed = 3;
+    public Player(Game g, KeyHandler k) {
+        // super(480, 665, ID.Player);
+        setDefaultLocation();
         game = g;
         keyH = k;
-        // this.mC = mC;
         dir = "stand";
 
         playerHealthBar = new JProgressBar();
@@ -54,15 +46,11 @@ public class Player extends Entity {
     }
 
     // Overloaded constructor for upgrade screen
-    public Player(Game g, KeyHandler k, ObjectHandler handler, int hpLevel, int attack) {
-        super(480, 665, ID.Player);
-        x = 480;
-        y = 665;
-        this.handler = handler;
-        playerSpeed = 3;
+    public Player(Game g, KeyHandler k, int hpLevel, int attack) {
+        // super(480, 665, ID.Player);
+        setDefaultLocation();
         game = g;
         keyH = k;
-        // this.mC = mC;
         dir = "stand";
 
         setHP(hpLevel);
@@ -77,6 +65,12 @@ public class Player extends Entity {
         playerHealthBar.setBackground(Color.white);
 
         getPlayer();
+    }
+
+    public void setDefaultLocation() {
+        this.x = 480;
+        this.y = 665;
+        playerSpeed = 3;
     }
 
     public JProgressBar getPlayerHealthBar() {
@@ -95,27 +89,16 @@ public class Player extends Entity {
         }
     }
 
-    @Override
+    // @Override
     public void update() {
-
-        // collision();
-
         if (keyH.leftPress == true) {
+            System.out.println("left pressed");
             dir = "left";
-            x -= playerSpeed;
-            /*
-             * if (x < 300) {
-             * x = 300;
-             * }
-             */
+            this.x -= playerSpeed;
+            System.out.print(x);
         } else if (keyH.rightPress == true) {
             dir = "right";
-            x += playerSpeed;
-            /*
-             * if (x > 620) {
-             * x = 620;
-             * }
-             */
+            this.x += playerSpeed;
         } else if (keyH.notPress == true) {
             dir = "stand";
         }
@@ -132,19 +115,6 @@ public class Player extends Entity {
         }
     }
 
-    private void collision() {
-        for (int i = 0; i < handler.objects.size(); i++) {
-            GameObject tempObject = handler.objects.get(i);
-
-            if (tempObject.getID() == ID.Map) {
-                if (getBound().intersects(tempObject.getBound())) {
-                    x += playerSpeed * -1;
-                    y += playerSpeed * -1;
-                }
-            }
-        }
-    }
-
     @Override
     public boolean decreaseHP(int attack) {
         hpLevel -= attack;
@@ -157,12 +127,10 @@ public class Player extends Entity {
         return true;
     }
 
-    @Override
     public Rectangle getBound() {
         return new Rectangle(x, y, 30, 47);
     }
 
-    @Override
     public void draw(Graphics g) {
 
         Graphics2D g2 = (Graphics2D) g;

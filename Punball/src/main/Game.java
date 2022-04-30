@@ -2,11 +2,8 @@ package main;
 
 import map.Map;
 import map.RandomMap;
-
 import entity.*;
-
 import java.awt.*;
-
 import javax.swing.*;
 
 public class Game extends JPanel implements Runnable {
@@ -18,14 +15,12 @@ public class Game extends JPanel implements Runnable {
     final int screenHeight = 780;
 
     // Objects
-    ObjectHandler handler;
-    // MouseClick m_Click;
-    // MouseMove m_Move;
-    KeyHandler KeyH;
 
     Enemy enemy;
     Player player;
     RandomMap map;
+
+    GamePanelPaint gamePanelPaint;
 
     // Switching page
     private CardLayout cardLayout;
@@ -37,33 +32,26 @@ public class Game extends JPanel implements Runnable {
 
     Thread gameThread;
 
-    public Game(CardLayout cardLayout, JPanel mainPanel) {
-        gameInit(cardLayout, mainPanel);
+    public Game(CardLayout cardLayout, JPanel mainPanel, KeyHandler keyH) {
+        gameInit(cardLayout, mainPanel, keyH);
     }
 
-    public Game(CardLayout cardLayout, JPanel mainPanel, int hpLevel, int attack) {
-        gameInit(cardLayout, mainPanel, hpLevel, attack);
+    public Game(CardLayout cardLayout, JPanel mainPanel, KeyHandler keyH, int hpLevel, int attack) {
+        gameInit(cardLayout, mainPanel, keyH, hpLevel, attack);
     }
 
-    public void gameInit(CardLayout cardLayout, JPanel mainPanel) {
+    public void gameInit(CardLayout cardLayout, JPanel mainPanel, KeyHandler KeyH) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
 
         // Objects
-        handler = new ObjectHandler();
-
-        // m_Click = new MouseClick();
-        // m_Move = new MouseMove();
-        KeyH = new KeyHandler();
-        player = new Player(this, KeyH, handler);
-        handler.addObject(player);
-
+        player = new Player(this, KeyH);
         enemy = new Enemy();
 
         // Map-Objects
-        handler.addObject(new Map(0, 180, 300, 540));
-        handler.addObject(new Map(0, 0, 960, 180));
-        handler.addObject(new Map(659, 180, 300, 540));
+        // handler.addObject(new Map(0, 180, 300, 540));
+        // handler.addObject(new Map(0, 0, 960, 180));
+        // handler.addObject(new Map(659, 180, 300, 540));
 
         map = new RandomMap();
 
@@ -72,7 +60,7 @@ public class Game extends JPanel implements Runnable {
         buttonTest = new JButton(iconUpgrade);
         buttonTest.setBounds(0, 0, 300, 95);
         buttonTest.addActionListener(e -> {
-            if (!player.decreaseHP(300)) {
+            if (!player.decreaseHP(enemy.getAttack())) {
                 cardLayout.show(mainPanel, "loseScreen");
             }
             System.out.println(player.getHP());
@@ -83,7 +71,7 @@ public class Game extends JPanel implements Runnable {
         buttonTest2 = new JButton(iconNext);
         buttonTest2.setBounds(0, 115, 300, 95);
         buttonTest2.addActionListener(e -> {
-            if (!enemy.decreaseHP(300)) {
+            if (!enemy.decreaseHP(player.getAttack())) {
                 cardLayout.show(mainPanel, "winScreen");
             }
             System.out.println(enemy.getHP());
@@ -95,33 +83,31 @@ public class Game extends JPanel implements Runnable {
         this.add(buttonTest);
         this.add(buttonTest2);
 
+        // Player player = (Player) this.player;
+        // Enemy enemy = (Enemy) this.enemy;
+
+        gamePanelPaint = new GamePanelPaint(enemy, player, map);
         this.add(player.getPlayerHealthBar());
         this.add(enemy.getEnemyHealthBar());
-        this.add(new GamePanelPaint(enemy, player, map));
+        this.add(gamePanelPaint);
         this.setDoubleBuffered(true);
         this.addKeyListener(KeyH);
         this.setFocusable(true);
     }
 
     // Overloaded method for upgrade screen
-    public void gameInit(CardLayout cardLayout, JPanel mainPanel, int hpLevel, int attack) {
+    public void gameInit(CardLayout cardLayout, JPanel mainPanel, KeyHandler KeyH, int hpLevel, int attack) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
 
         // Objects
-        handler = new ObjectHandler();
-
-        // m_Click = new MouseClick();
-        // m_Move = new MouseMove();
-        KeyH = new KeyHandler();
-        player = new Player(this, KeyH, handler,hpLevel,attack);
-        handler.addObject(player);
-
+        player = new Player(this, KeyH, hpLevel, attack);
         // Map-Objects
-        handler.addObject(new Map(0, 180, 300, 540));
-        handler.addObject(new Map(0, 0, 960, 180));
-        handler.addObject(new Map(659, 180, 300, 540));
-
+        /*
+         * handler.addObject(new Map(0, 180, 300, 540));
+         * handler.addObject(new Map(0, 0, 960, 180));
+         * handler.addObject(new Map(659, 180, 300, 540));
+         */
         enemy = new Enemy();
         map = new RandomMap();
 
@@ -130,7 +116,7 @@ public class Game extends JPanel implements Runnable {
         buttonTest = new JButton(iconUpgrade);
         buttonTest.setBounds(0, 0, 300, 95);
         buttonTest.addActionListener(e -> {
-            if (!player.decreaseHP(300)) {
+            if (!player.decreaseHP(enemy.getAttack())) {
                 cardLayout.show(mainPanel, "loseScreen");
             }
             System.out.println(player.getHP());
@@ -141,7 +127,7 @@ public class Game extends JPanel implements Runnable {
         buttonTest2 = new JButton(iconNext);
         buttonTest2.setBounds(0, 115, 300, 95);
         buttonTest2.addActionListener(e -> {
-            if (!enemy.decreaseHP(300)) {
+            if (!enemy.decreaseHP(player.getAttack())) {
                 cardLayout.show(mainPanel, "winScreen");
             }
             System.out.println(enemy.getHP());
@@ -153,34 +139,37 @@ public class Game extends JPanel implements Runnable {
         this.add(buttonTest);
         this.add(buttonTest2);
 
+        Player player = (Player) this.player;
+        Enemy enemy = (Enemy) this.enemy;
+        gamePanelPaint = new GamePanelPaint(enemy, player, map);
         this.add(player.getPlayerHealthBar());
         this.add(enemy.getEnemyHealthBar());
-        this.add(new GamePanelPaint(enemy, player, map));
+        this.add(gamePanelPaint);
         this.setDoubleBuffered(true);
         this.addKeyListener(KeyH);
         this.setFocusable(true);
     }
 
-    public void restartGame(CardLayout cardLayout, JPanel mainPanel) {
+    public void restartGame(CardLayout cardLayout, JPanel mainPanel, KeyHandler keyH) {
         this.removeAll(); // remove all components from panel but not completely destroy
         this.revalidate(); // after remove, put back objects~~
         this.repaint();
         System.gc(); // คือการทำบาย objects ที่ไม่ได้ใช้แล้ว ไม่ให้เปลืองความจำ
-        gameInit(cardLayout, mainPanel);
+        gameInit(cardLayout, mainPanel, keyH);
     }
 
     // Overloaded method for upgrade screen
-    public void restartGame(CardLayout cardLayout, JPanel mainPanel, int hpLevel, int attack) {
+    public void restartGame(CardLayout cardLayout, JPanel mainPanel, KeyHandler keyH, int hpLevel, int attack) {
         this.removeAll();
         this.revalidate();
         this.repaint();
         System.gc();
         System.out.println(hpLevel);
-        gameInit(cardLayout, mainPanel, hpLevel, attack);
+        gameInit(cardLayout, mainPanel, keyH, hpLevel, attack);
     }
 
     public Player getPlayer() {
-        return player;
+        return (Player) player;
     }
 
     public void startGameThread() {
@@ -222,6 +211,7 @@ public class Game extends JPanel implements Runnable {
     }
 
     public void update() {
+        // Player player = (Player) this.player;
         player.update();
     }
 

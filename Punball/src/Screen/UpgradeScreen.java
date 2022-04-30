@@ -3,7 +3,7 @@ package Screen;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-
+import main.KeyHandler;
 import entity.Player;
 import main.Game;
 
@@ -26,14 +26,14 @@ public class UpgradeScreen extends JPanel implements ActionListener {
     private JPanel mainPanel;
     private Player player;
     private Game game;
-
+    private KeyHandler keyH;
     private int hpLevel = 1000;
     private int attack = 200;
 
-    public UpgradeScreen(CardLayout cardLayout, JPanel mainPanel, Player player, Game game) {
+    public UpgradeScreen(CardLayout cardLayout, JPanel mainPanel, Player player, Game game, KeyHandler keyH) {
 
         this.player = player;
-
+        this.keyH = keyH;
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
 
@@ -139,54 +139,64 @@ public class UpgradeScreen extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getSource() == hp1000button || e.getSource() == hp4000button 
-         || e.getSource() == hp6000button || e.getSource() == hp8000button 
-         || e.getSource() == hp10000button) {
+        if (e.getSource() == hp1000button || e.getSource() == hp4000button
+                || e.getSource() == hp6000button || e.getSource() == hp8000button
+                || e.getSource() == hp10000button) {
 
             resetHpButton();
 
             if (e.getSource() == hp1000button) {
                 hp1000button.setIcon(new ImageIcon("imgs/usedHp1000button.png"));
                 hpLevel = 1000;
+                player.setHP(hpLevel);
             } else if (e.getSource() == hp4000button) {
                 hp4000button.setIcon(new ImageIcon("imgs/usedHp4000button.png"));
                 hpLevel = 4000;
+                player.setHP(hpLevel);
             } else if (e.getSource() == hp6000button) {
                 hp6000button.setIcon(new ImageIcon("imgs/usedHp6000button.png"));
                 hpLevel = 6000;
+                player.setHP(hpLevel);
             } else if (e.getSource() == hp8000button) {
                 hp8000button.setIcon(new ImageIcon("imgs/usedHp8000button.png"));
                 hpLevel = 8000;
+                player.setHP(hpLevel);
             } else if (e.getSource() == hp10000button) {
                 hp10000button.setIcon(new ImageIcon("imgs/usedHp10000button.png"));
                 hpLevel = 10000;
+                player.setHP(hpLevel);
             }
         } else if (e.getSource() == damage200button || e.getSource() == damage400button
                 || e.getSource() == damage600button || e.getSource() == damage800button
                 || e.getSource() == damage1000button) {
 
             resetDamageButton();
-        
+
             if (e.getSource() == damage200button) {
                 damage200button.setIcon(new ImageIcon("imgs/usedDamage200button.png"));
                 attack = 200;
+                player.setAttack(attack);
             } else if (e.getSource() == damage400button) {
                 damage400button.setIcon(new ImageIcon("imgs/usedDamage400button.png"));
                 attack = 400;
+                player.setAttack(attack);
             } else if (e.getSource() == damage600button) {
                 damage600button.setIcon(new ImageIcon("imgs/usedDamage600button.png"));
                 attack = 600;
+                player.setAttack(attack);
             } else if (e.getSource() == damage800button) {
                 damage800button.setIcon(new ImageIcon("imgs/usedDamage800button.png"));
                 attack = 800;
+                player.setAttack(attack);
             } else if (e.getSource() == damage1000button) {
                 damage1000button.setIcon(new ImageIcon("imgs/usedDamage1000button.png"));
                 attack = 1000;
+                player.setAttack(attack);
             }
         } else if (e.getSource() == buttonStartUp) {
             cardLayout.show(mainPanel, "gameScreen");
-            game.restartGame(cardLayout, mainPanel,hpLevel,attack);
-            System.out.println("HP : "+hpLevel);
+            game.restartGame(cardLayout, mainPanel, keyH, hpLevel, attack);
+            System.out.println("HP : " + hpLevel);
         }
 
     }

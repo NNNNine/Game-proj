@@ -21,10 +21,12 @@ public class Enemy extends Entity {
 
     public Enemy() {
         super(440, 270, ID.Enemy);
+
         Random r = new Random();
         int temp_h = r.nextInt(10);
-        health = temp_h * 5000;
+        health = temp_h * 3000;
         super.setHP(health);
+        super.setAttack(temp_h * 100);
 
         int temp_enemy = r.nextInt(5);
         chooseEnemy = allEnemy[temp_enemy];
@@ -67,11 +69,5 @@ public class Enemy extends Entity {
 
     public Rectangle getBound() {
         return new Rectangle(x, y, 120, 120);
-    }
-
-    @Override
-    public void draw(Graphics g) {
-        // TODO Auto-generated method stub
-
     }
 }

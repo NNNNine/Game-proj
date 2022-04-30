@@ -3,7 +3,7 @@ package Screen;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-
+import main.KeyHandler;
 import main.Game;
 
 public class LoseScreen extends JPanel implements ActionListener {
@@ -14,10 +14,10 @@ public class LoseScreen extends JPanel implements ActionListener {
 
     private CardLayout cardLayout;
     private JPanel mainPanel;
-
+    private KeyHandler keyH;
     private Game game;
 
-    public LoseScreen(CardLayout cardLayout, JPanel mainPanel, Game game) {
+    public LoseScreen(CardLayout cardLayout, JPanel mainPanel, Game game, KeyHandler keyH) {
 
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
@@ -43,11 +43,11 @@ public class LoseScreen extends JPanel implements ActionListener {
         buttonQuit.setBorderPainted(false);
         buttonQuit.setContentAreaFilled(false);
         buttonQuit.addActionListener(this);
-        
+
         this.add(buttonTryAgain);
         this.add(buttonQuit);
         this.add(screenImage);
-        
+
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
 
     }
@@ -59,7 +59,7 @@ public class LoseScreen extends JPanel implements ActionListener {
             int hpLevel = game.getPlayer().getMaxHP();
             int attack = game.getPlayer().getAttack();
             System.out.println(hpLevel);
-            game.restartGame(cardLayout, mainPanel,hpLevel,attack);
+            game.restartGame(cardLayout, mainPanel, keyH, hpLevel, attack);
         }
 
         if (e.getSource() == buttonQuit) {

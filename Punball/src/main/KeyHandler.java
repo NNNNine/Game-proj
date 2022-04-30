@@ -4,12 +4,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
-
     public boolean leftPress, rightPress, notPress;
+
     @Override
     public void keyTyped(KeyEvent e) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
@@ -17,11 +17,12 @@ public class KeyHandler implements KeyListener {
 
         int temp = e.getKeyCode();
 
-        if(temp == KeyEvent.VK_A) {
+        if (temp == KeyEvent.VK_A) {
+            System.out.println("pressed");
             leftPress = true;
             notPress = false;
         }
-        if(temp == KeyEvent.VK_D) {
+        if (temp == KeyEvent.VK_D) {
             rightPress = true;
             notPress = false;
         }
@@ -29,17 +30,16 @@ public class KeyHandler implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        
+
         int temp = e.getKeyCode();
-        
-        if(temp == KeyEvent.VK_A) {
+
+        if (temp == KeyEvent.VK_A) {
             leftPress = false;
             notPress = true;
         }
-        if(temp == KeyEvent.VK_D) {
+        if (temp == KeyEvent.VK_D) {
             rightPress = false;
             notPress = true;
         }
     }
-    
 }

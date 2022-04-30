@@ -2,18 +2,15 @@ package entity;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import main.GameObject;
 import main.ID;
-import main.ObjectHandler;
 
-public abstract class Ball extends GameObject {
+public abstract class Ball {
     public int ball_ammo;
+    public int x, y, width, height;
 
-    private ObjectHandler handler;
-
-    public Ball(int x, int y, ID id, ObjectHandler handler) {
-        super(x, y, id);
-        this.handler = handler;
+    public Ball(int x, int y, ID id) {
+        this.x = x;
+        this.y = y;
     }
 
     public abstract void update();

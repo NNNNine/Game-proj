@@ -1,7 +1,5 @@
 package main;
 
-import entity.EnemyBall;
-
 public enum ID {
     Player(),
     Map(),

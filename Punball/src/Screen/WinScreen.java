@@ -3,9 +3,7 @@ package Screen;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-
-import org.w3c.dom.Attr;
-
+import main.KeyHandler;
 import main.Game;
 
 public class WinScreen extends JPanel implements ActionListener {
@@ -18,13 +16,14 @@ public class WinScreen extends JPanel implements ActionListener {
     private CardLayout cardLayout;
     private JPanel mainPanel;
     private Game game;
+    private KeyHandler keyH;
 
-    public WinScreen(CardLayout cardLayout, JPanel mainPanel,Game game) {
+    public WinScreen(CardLayout cardLayout, JPanel mainPanel, Game game, KeyHandler keyH) {
 
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
         this.game = game;
-
+        this.keyH = keyH;
         this.setLayout(null);
 
         JLabel screenImage = new JLabel();
@@ -47,11 +46,10 @@ public class WinScreen extends JPanel implements ActionListener {
         buttonQuit.setContentAreaFilled(false);
         buttonQuit.addActionListener(this);
 
-        
         this.add(buttonNext);
         this.add(buttonQuit);
         this.add(screenImage);
-        
+
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
 
     }
@@ -63,7 +61,7 @@ public class WinScreen extends JPanel implements ActionListener {
             int hpLevel = game.getPlayer().getMaxHP();
             int attack = game.getPlayer().getAttack();
             System.out.println(hpLevel);
-            game.restartGame(cardLayout, mainPanel,hpLevel,attack);
+            game.restartGame(cardLayout, mainPanel, keyH, hpLevel, attack);
         }
 
         if (e.getSource() == buttonQuit) {

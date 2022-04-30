@@ -1,21 +1,24 @@
 package entity;
 
 import java.awt.Rectangle;
-import main.GameObject;
 import main.ID;
 
-public abstract class Entity extends GameObject {
-
-    public Entity(int x, int y, ID id) {
-        super(x, y, id);
-    }
-
+public class Entity {
     public int x, y, height, width;
     protected int hpLevel = 1000;
     protected int maxHP = 1000;
     private int attack = 200;
+    private ID id;
 
-    public abstract Rectangle getBound();
+    public Entity() {
+
+    }
+
+    public Entity(int x, int y, ID id) {
+        this.x = x;
+        this.y = y;
+        this.id = id;
+    }
 
     public void setHP(int hpLevel) {
         this.hpLevel = hpLevel;
@@ -53,5 +56,4 @@ public abstract class Entity extends GameObject {
         return this.attack;
 
     }
-
 }

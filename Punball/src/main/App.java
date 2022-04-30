@@ -19,19 +19,20 @@ public class App {
         screen.setResizable(false);
         screen.setTitle("Punball");
 
+        KeyHandler KeyH = new KeyHandler();
         JPanel mainPanel = new JPanel();
         CardLayout cardLayout = new CardLayout();
 
         mainPanel.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         mainPanel.setLayout(cardLayout);
 
-        Game game = new Game(cardLayout, mainPanel);
+        Game game = new Game(cardLayout, mainPanel, KeyH);
 
-        mainPanel.add(new TitleScreen(cardLayout, mainPanel, game), "titleScreen");
-        mainPanel.add(new UpgradeScreen(cardLayout, mainPanel, game.getPlayer(), game), "upgradeScreen");
+        mainPanel.add(new TitleScreen(cardLayout, mainPanel, game, KeyH), "titleScreen");
+        mainPanel.add(new UpgradeScreen(cardLayout, mainPanel, game.getPlayer(), game, KeyH), "upgradeScreen");
         mainPanel.add(game, "gameScreen");
-        mainPanel.add(new WinScreen(cardLayout, mainPanel, game), "winScreen");
-        mainPanel.add(new LoseScreen(cardLayout, mainPanel, game), "loseScreen");
+        mainPanel.add(new WinScreen(cardLayout, mainPanel, game, KeyH), "winScreen");
+        mainPanel.add(new LoseScreen(cardLayout, mainPanel, game, KeyH), "loseScreen");
 
         screen.add(mainPanel);
         screen.setVisible(true);
