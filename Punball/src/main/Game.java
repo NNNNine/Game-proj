@@ -4,9 +4,16 @@ import map.Map;
 import map.RandomMap;
 import entity.*;
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 
 public class Game extends JPanel implements Runnable {
+
+    KeyHandler keyH;
+
+    int playerX = 480;
+    int playerY = 665;
+    int playerSpeed = 3;
 
     // Screen Res
     final int maxScreenCol = 16;
@@ -43,6 +50,8 @@ public class Game extends JPanel implements Runnable {
     public void gameInit(CardLayout cardLayout, JPanel mainPanel, KeyHandler KeyH) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
+
+        keyH = new KeyHandler();
 
         // Objects
         player = new Player(this, KeyH);
@@ -93,12 +102,15 @@ public class Game extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
         this.addKeyListener(KeyH);
         this.setFocusable(true);
+        this.requestFocus();
     }
 
     // Overloaded method for upgrade screen
     public void gameInit(CardLayout cardLayout, JPanel mainPanel, KeyHandler KeyH, int hpLevel, int attack) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
+
+        keyH = new KeyHandler();
 
         // Objects
         player = new Player(this, KeyH, hpLevel, attack);
@@ -148,6 +160,7 @@ public class Game extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
         this.addKeyListener(KeyH);
         this.setFocusable(true);
+        this.requestFocus();
     }
 
     public void restartGame(CardLayout cardLayout, JPanel mainPanel, KeyHandler keyH) {

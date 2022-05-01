@@ -9,7 +9,6 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-
 import main.Game;
 import main.KeyHandler;
 import main.ID;
@@ -92,13 +91,18 @@ public class Player extends Entity {
     // @Override
     public void update() {
         if (keyH.leftPress == true) {
-            System.out.println("left pressed");
-            dir = "left";
-            this.x -= playerSpeed;
-            System.out.print(x);
+            if (x > 300) {
+                System.out.println("left pressed");
+                dir = "left";
+                this.x -= playerSpeed;
+                System.out.print(x);
+            }
         } else if (keyH.rightPress == true) {
-            dir = "right";
-            this.x += playerSpeed;
+            if (x < 660-40 ){
+                System.out.println("right pressed");
+                dir = "right";
+                this.x += playerSpeed;
+            }
         } else if (keyH.notPress == true) {
             dir = "stand";
         }
@@ -163,4 +167,6 @@ public class Player extends Entity {
         g2.drawImage(image, null, x, y);
 
     }
+
+    
 }
