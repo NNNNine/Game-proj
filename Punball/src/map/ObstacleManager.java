@@ -8,7 +8,6 @@ import main.Game;
 public class ObstacleManager {
 
     Game g;
-    // RandomObs t_rand;
     Obstacle[] obs;
     private boolean are_random, second_rand;
     private int[] r_obs = { 1, 3, 1, 1, 5, 1 };
@@ -32,18 +31,23 @@ public class ObstacleManager {
 
             obs[1] = new Obstacle();
             obs[1].image = ImageIO.read(getClass().getResourceAsStream("res/rock.png"));
+            obs[1].collision = true;
 
             obs[2] = new Obstacle();
             obs[2].image = ImageIO.read(getClass().getResourceAsStream("res/ball+5.png"));
+            obs[2].powerUp = true;
 
             obs[3] = new Obstacle();
             obs[3].image = ImageIO.read(getClass().getResourceAsStream("res/ball+15.png"));
+            obs[2].powerUp = true;
 
             obs[4] = new Obstacle();
             obs[4].image = ImageIO.read(getClass().getResourceAsStream("res/ball-15.png"));
+            obs[2].powerUp = true;
 
             obs[5] = new Obstacle();
             obs[5].image = ImageIO.read(getClass().getResourceAsStream("res/ballx10.png"));
+            obs[2].powerUp = true;
 
         } catch (IOException e) {
             e.printStackTrace();
