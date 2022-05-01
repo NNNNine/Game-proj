@@ -1,7 +1,6 @@
 package main;
 
-import map.Map;
-import map.RandomMap;
+import map.*;
 import entity.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -16,16 +15,17 @@ public class Game extends JPanel implements Runnable {
     int playerSpeed = 3;
 
     // Screen Res
-    final int maxScreenCol = 16;
-    final int maxScreenRow = 13;
-    final int screenWidth = 960;
-    final int screenHeight = 780;
+    public final int maxScreenCol = 16;
+    public final int maxScreenRow = 13;
+    public final int screenWidth = 960;
+    public final int screenHeight = 780;
 
     // Objects
 
     Enemy enemy;
     Player player;
     RandomMap map;
+    ObstacleManager obs_m;
 
     GamePanelPaint gamePanelPaint;
 
@@ -56,13 +56,15 @@ public class Game extends JPanel implements Runnable {
         // Objects
         player = new Player(this, KeyH);
         enemy = new Enemy();
-
+        obs_m = new ObstacleManager(this);
         // Map-Objects
         // handler.addObject(new Map(0, 180, 300, 540));
         // handler.addObject(new Map(0, 0, 960, 180));
         // handler.addObject(new Map(659, 180, 300, 540));
 
         map = new RandomMap();
+        // up_ob = new Obstacle();
+        // down_ob = new Obstacle();
 
         // Button test as a ball attack player
         Icon iconUpgrade = new ImageIcon("imgs/UpgradeButton.png");
@@ -95,7 +97,7 @@ public class Game extends JPanel implements Runnable {
         // Player player = (Player) this.player;
         // Enemy enemy = (Enemy) this.enemy;
 
-        gamePanelPaint = new GamePanelPaint(enemy, player, map);
+        gamePanelPaint = new GamePanelPaint(enemy, player, map, obs_m);
         this.add(player.getPlayerHealthBar());
         this.add(enemy.getEnemyHealthBar());
         this.add(gamePanelPaint);
@@ -114,6 +116,7 @@ public class Game extends JPanel implements Runnable {
 
         // Objects
         player = new Player(this, KeyH, hpLevel, attack);
+        obs_m = new ObstacleManager(this);
         // Map-Objects
         /*
          * handler.addObject(new Map(0, 180, 300, 540));
@@ -153,7 +156,7 @@ public class Game extends JPanel implements Runnable {
 
         Player player = (Player) this.player;
         Enemy enemy = (Enemy) this.enemy;
-        gamePanelPaint = new GamePanelPaint(enemy, player, map);
+        gamePanelPaint = new GamePanelPaint(enemy, player, map, obs_m);
         this.add(player.getPlayerHealthBar());
         this.add(enemy.getEnemyHealthBar());
         this.add(gamePanelPaint);
