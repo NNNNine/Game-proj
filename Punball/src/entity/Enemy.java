@@ -23,7 +23,7 @@ public class Enemy extends Entity {
         super(440, 270, ID.Enemy);
 
         Random r = new Random();
-        int temp_h = r.nextInt(10);
+        int temp_h = r.nextInt(9) + 1;
         health = temp_h * 3000;
         super.setHP(health);
         super.setAttack(temp_h * 100);

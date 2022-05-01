@@ -14,12 +14,14 @@ public class GamePanelPaint extends JPanel {
     private RandomMap map;
     private ObstacleManager obs;
     private Ball ball;
+    private ObstacleManager obs1, obs2;
 
-    public GamePanelPaint(Enemy enemy, Player player, RandomMap map, ObstacleManager obs, Ball ball) {
+    public GamePanelPaint(Enemy enemy, Player player, RandomMap map, ObstacleManager obs1, ObstacleManager obs2, Ball ball) {
         this.player = player;
         this.enemy = enemy;
         this.map = map;
-        this.obs = obs;
+        this.obs1 = obs1;
+        this.obs2 = obs2;
         this.ball = ball;
         this.setBounds(0, 0, 960, 780);
     }
@@ -29,7 +31,8 @@ public class GamePanelPaint extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
 
         map.draw(g2d);
-        obs.draw(g2d);
+        obs1.draw(g2d);
+        obs2.draw(g2d);
         player.draw(g);
         enemy.draw(g2d);
         ball.draw(g2d);
