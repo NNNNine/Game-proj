@@ -2,6 +2,9 @@ package map;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.geom.Line2D;
+import javax.swing.border.LineBorder;
+
 import main.ID;
 
 public class Map {
@@ -17,6 +20,15 @@ public class Map {
 
     public Rectangle getBound() {
         return new Rectangle(x, y, width, height);
+    }
+    
+    // ขอบเขตของเกมที่ยิงลูกบอล
+    public Rectangle getBoundInGame(){ 
+        int xLeft = 300; //  จุดxด้านซ้าย
+        int yTop = 180; // yด้านบน
+        int xRight = 660; //  จุดxขวา
+        int yBot = 650; // yด้านล่าง
+       return new Rectangle(xLeft,yTop, xRight-xLeft,yBot-yTop);
     }
 
     public void update() {
