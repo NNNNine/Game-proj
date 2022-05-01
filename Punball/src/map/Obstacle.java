@@ -8,4 +8,5 @@ import javax.imageio.ImageIO;
 public class Obstacle {
     public BufferedImage image;
     public boolean collision = false;
+    public boolean powerUp = false;
 }
