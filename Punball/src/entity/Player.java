@@ -92,14 +92,11 @@ public class Player extends Entity {
     public void update() {
         if (keyH.leftPress == true) {
             if (x > 300) {
-                System.out.println("left pressed");
                 dir = "left";
                 this.x -= playerSpeed;
-                System.out.print(x);
             }
         } else if (keyH.rightPress == true) {
-            if (x < 660-40 ){
-                System.out.println("right pressed");
+            if (x < 660 - 40) {
                 dir = "right";
                 this.x += playerSpeed;
             }
@@ -168,5 +165,4 @@ public class Player extends Entity {
 
     }
 
-    
 }

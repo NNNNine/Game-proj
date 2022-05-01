@@ -18,7 +18,6 @@ public class KeyHandler implements KeyListener {
         int temp = e.getKeyCode();
 
         if (temp == KeyEvent.VK_A) {
-            System.out.println("pressed");
             leftPress = true;
             notPress = false;
         }
