@@ -25,7 +25,7 @@ public class Game extends JPanel implements Runnable {
     Enemy enemy;
     Player player;
     RandomMap map;
-    ObstacleManager obs_m;
+    ObstacleManager obs_m_up, obs_m_down;
 
     GamePanelPaint gamePanelPaint;
 
@@ -56,15 +56,13 @@ public class Game extends JPanel implements Runnable {
         // Objects
         player = new Player(this, KeyH);
         enemy = new Enemy();
-        obs_m = new ObstacleManager(this);
+        obs_m_up = new ObstacleManager(this, 7);
+        obs_m_down = new ObstacleManager(this, 9);
+        map = new RandomMap();
         // Map-Objects
         // handler.addObject(new Map(0, 180, 300, 540));
         // handler.addObject(new Map(0, 0, 960, 180));
         // handler.addObject(new Map(659, 180, 300, 540));
-
-        map = new RandomMap();
-        // up_ob = new Obstacle();
-        // down_ob = new Obstacle();
 
         // Button test as a ball attack player
         Icon iconUpgrade = new ImageIcon("imgs/UpgradeButton.png");
@@ -97,7 +95,7 @@ public class Game extends JPanel implements Runnable {
         // Player player = (Player) this.player;
         // Enemy enemy = (Enemy) this.enemy;
 
-        gamePanelPaint = new GamePanelPaint(enemy, player, map, obs_m);
+        gamePanelPaint = new GamePanelPaint(enemy, player, map, obs_m_up, obs_m_down);
         this.add(player.getPlayerHealthBar());
         this.add(enemy.getEnemyHealthBar());
         this.add(gamePanelPaint);
@@ -116,7 +114,8 @@ public class Game extends JPanel implements Runnable {
 
         // Objects
         player = new Player(this, KeyH, hpLevel, attack);
-        obs_m = new ObstacleManager(this);
+        obs_m_up = new ObstacleManager(this, 7);
+        obs_m_down = new ObstacleManager(this, 9);
         // Map-Objects
         /*
          * handler.addObject(new Map(0, 180, 300, 540));
@@ -156,7 +155,7 @@ public class Game extends JPanel implements Runnable {
 
         Player player = (Player) this.player;
         Enemy enemy = (Enemy) this.enemy;
-        gamePanelPaint = new GamePanelPaint(enemy, player, map, obs_m);
+        gamePanelPaint = new GamePanelPaint(enemy, player, map, obs_m_up, obs_m_down);
         this.add(player.getPlayerHealthBar());
         this.add(enemy.getEnemyHealthBar());
         this.add(gamePanelPaint);

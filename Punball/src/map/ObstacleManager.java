@@ -8,12 +8,20 @@ import main.Game;
 public class ObstacleManager {
 
     Game g;
+    // RandomObs t_rand;
     Obstacle[] obs;
+    private boolean are_random, second_rand;
+    private int[] r_obs = { 1, 3, 1, 1, 5, 1 };
+    private int row;
 
-    public ObstacleManager(Game g) {
+    public ObstacleManager(Game g, int r) {
         this.g = g;
 
+        row = r;
         obs = new Obstacle[6];
+        are_random = false;
+        second_rand = false;
+        // t_rand = new RandomObs();
 
         getObsImage();
     }
@@ -43,27 +51,33 @@ public class ObstacleManager {
     }
 
     public void draw(Graphics2D g) {
+
         RandomObs t_rand = new RandomObs();
 
         int col = 5;
-        int row = 7;
         int x = 60 * col;
         int y = 60 * row;
-        int[] r_obs = t_rand.rand_all_ob();
+
+        if (!are_random) {
+            are_random = true;
+            r_obs = t_rand.rand_all_ob();
+        }
 
         while (col < 11 && row < 10) {
 
             g.drawImage(obs[r_obs[col - 5]].image, x, y, 60, 60, null);
             col++;
             x += 60;
-
-            if (col == 11) {
-                col = 5;
-                x = 60 * col;
-                row += 2;
-                y = 60 * row;
-                r_obs = t_rand.rand_all_ob();
-            }
+            /*
+             * if (col == 11 && !second_rand) {
+             * col = 5;
+             * x = 60 * col;
+             * row += 2;
+             * y = 60 * row;
+             * second_rand = true;
+             * r_obs = t_rand.rand_all_ob();
+             * }
+             */
         }
     }
 }
