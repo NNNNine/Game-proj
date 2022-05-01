@@ -34,7 +34,7 @@ public class Player extends Entity {
         this.keyH = k;
         dir = "stand";
 
-        ball = new Ball(this.x, this.y, game);
+        ball = new Ball(this.x, this.y, game, this);
 
         playerHealthBar = new JProgressBar();
         playerHealthBar.setValue(100);
@@ -54,7 +54,7 @@ public class Player extends Entity {
         this.keyH = k;
         dir = "stand";
 
-        ball = new Ball(this.x, this.y,game);
+        ball = new Ball(this.x, this.y,game, this);
 
         setHP(hpLevel);
         setAttack(attack);
@@ -91,6 +91,14 @@ public class Player extends Entity {
         }
     }
 
+    public int getX(){
+        return this.x;
+    }
+
+    public int getY(){
+        return this.y;
+    }
+
     // @Override
     public void update() {
         if (keyH.leftPress == true) {
@@ -117,6 +125,8 @@ public class Player extends Entity {
 
             ani_co = 0;
         }
+
+        ball.ballMove(this.x, this.y);
     }
 
     @Override
