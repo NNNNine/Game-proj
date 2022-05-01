@@ -21,7 +21,7 @@ public class Map {
     public Rectangle getBound() {
         return new Rectangle(x, y, width, height);
     }
-    
+
     // ขอบเขตของเกมที่ยิงลูกบอล
     public Rectangle getBoundInGame(){ 
         int xLeft = 300; //  จุดxด้านซ้าย
@@ -29,6 +29,7 @@ public class Map {
         int xRight = 660; //  จุดxขวา
         int yBot = 650; // yด้านล่าง
        return new Rectangle(xLeft,yTop, xRight-xLeft,yBot-yTop);
+       
     }
 
     public void update() {

@@ -163,21 +163,23 @@ public class Game extends JPanel implements Runnable {
         this.requestFocus();
     }
 
-    public void restartGame(CardLayout cardLayout, JPanel mainPanel, KeyHandler keyH) {
+    public void restartGame(CardLayout cardLayout, JPanel mainPanel, KeyHandler KeyH) {
         this.removeAll(); // remove all components from panel but not completely destroy
         this.revalidate(); // after remove, put back objects~~
         this.repaint();
         System.gc(); // คือการทำบาย objects ที่ไม่ได้ใช้แล้ว ไม่ให้เปลืองความจำ
+        this.addKeyListener(KeyH);
         gameInit(cardLayout, mainPanel, keyH);
     }
 
     // Overloaded method for upgrade screen
-    public void restartGame(CardLayout cardLayout, JPanel mainPanel, KeyHandler keyH, int hpLevel, int attack) {
+    public void restartGame(CardLayout cardLayout, JPanel mainPanel, KeyHandler KeyH, int hpLevel, int attack) {
         this.removeAll();
         this.revalidate();
         this.repaint();
         System.gc();
         System.out.println(hpLevel);
+        this.addKeyListener(KeyH);
         gameInit(cardLayout, mainPanel, keyH, hpLevel, attack);
     }
 
@@ -225,7 +227,7 @@ public class Game extends JPanel implements Runnable {
 
     public void update() {
         // Player player = (Player) this.player;
-        player.update();
+        this.player.update();
     }
 
 }

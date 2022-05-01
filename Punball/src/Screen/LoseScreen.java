@@ -66,5 +66,4 @@ public class LoseScreen extends JPanel implements ActionListener {
             cardLayout.show(mainPanel, "titleScreen");
         }
     }
-
 }

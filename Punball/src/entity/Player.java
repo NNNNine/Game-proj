@@ -30,13 +30,12 @@ public class Player extends Entity {
         // super(480, 665, ID.Player);
         setDefaultLocation();
         game = g;
-        keyH = k;
+        this.keyH = k;
         dir = "stand";
 
         playerHealthBar = new JProgressBar();
         playerHealthBar.setValue(100);
         playerHealthBar.setStringPainted(true);
-        // playerHealthBar.setString(String.valueOf(super.getHP()));
         playerHealthBar.setBounds(300, 725, 360, 30);
         playerHealthBar.setForeground(Color.red);
         playerHealthBar.setBackground(Color.white);
@@ -49,7 +48,7 @@ public class Player extends Entity {
         // super(480, 665, ID.Player);
         setDefaultLocation();
         game = g;
-        keyH = k;
+        this.keyH = k;
         dir = "stand";
 
         setHP(hpLevel);
@@ -58,7 +57,6 @@ public class Player extends Entity {
         playerHealthBar = new JProgressBar();
         playerHealthBar.setValue(100);
         playerHealthBar.setStringPainted(true);
-        // playerHealthBar.setString(String.valueOf(super.getHP()));
         playerHealthBar.setBounds(300, 725, 360, 30);
         playerHealthBar.setForeground(Color.red);
         playerHealthBar.setBackground(Color.white);
@@ -95,7 +93,6 @@ public class Player extends Entity {
                 System.out.println("left pressed");
                 dir = "left";
                 this.x -= playerSpeed;
-                System.out.print(x);
             }
         } else if (keyH.rightPress == true) {
             if (x < 660-40 ){
