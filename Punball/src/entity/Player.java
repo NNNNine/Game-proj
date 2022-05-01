@@ -34,7 +34,7 @@ public class Player extends Entity {
         this.keyH = k;
         dir = "stand";
 
-        ball = new Ball(this.x, this.y);
+        ball = new Ball(this.x, this.y, game);
 
         playerHealthBar = new JProgressBar();
         playerHealthBar.setValue(100);
@@ -54,7 +54,7 @@ public class Player extends Entity {
         this.keyH = k;
         dir = "stand";
 
-        ball = new Ball(this.x, this.y);
+        ball = new Ball(this.x, this.y,game);
 
         setHP(hpLevel);
         setAttack(attack);
