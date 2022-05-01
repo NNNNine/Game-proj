@@ -21,11 +21,15 @@ public class Ball {
     }
 
     public void draw(Graphics g) {
-        g.setColor(Color.WHITE);
-        g.fillOval(x, y, width, height);
+        g.setColor(Color.RED);
+        g.fillOval(x+15, y-20, width, height);
     }
 
     public Rectangle getBound() {
         return new Rectangle(x, y, width, height);
     }
+
+    //public int moveX(){
+
+    //}
 }

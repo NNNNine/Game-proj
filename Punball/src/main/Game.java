@@ -97,7 +97,7 @@ public class Game extends JPanel implements Runnable {
         // Player player = (Player) this.player;
         // Enemy enemy = (Enemy) this.enemy;
 
-        gamePanelPaint = new GamePanelPaint(enemy, player, map, obs_m);
+        gamePanelPaint = new GamePanelPaint(enemy, player, map, obs_m, player.getBall());
         this.add(player.getPlayerHealthBar());
         this.add(enemy.getEnemyHealthBar());
         this.add(gamePanelPaint);
@@ -156,7 +156,7 @@ public class Game extends JPanel implements Runnable {
 
         Player player = (Player) this.player;
         Enemy enemy = (Enemy) this.enemy;
-        gamePanelPaint = new GamePanelPaint(enemy, player, map, obs_m);
+        gamePanelPaint = new GamePanelPaint(enemy, player, map, obs_m, player.getBall());
         this.add(player.getPlayerHealthBar());
         this.add(enemy.getEnemyHealthBar());
         this.add(gamePanelPaint);

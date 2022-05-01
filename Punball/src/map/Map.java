@@ -28,8 +28,7 @@ public class Map {
         int yTop = 180; // yด้านบน
         int xRight = 660; //  จุดxขวา
         int yBot = 650; // yด้านล่าง
-       return new Rectangle(xLeft,yTop, xRight-xLeft,yBot-yTop);
-       
+        return new Rectangle(xLeft,yTop, xRight-xLeft,yBot-yTop);
     }
 
     public void update() {

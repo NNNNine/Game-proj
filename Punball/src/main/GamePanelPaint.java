@@ -2,8 +2,7 @@ package main;
 
 import javax.swing.*;
 
-import entity.Enemy;
-import entity.Player;
+import entity.*;
 import map.RandomMap;
 import map.ObstacleManager;
 
@@ -14,12 +13,14 @@ public class GamePanelPaint extends JPanel {
     private Enemy enemy;
     private RandomMap map;
     private ObstacleManager obs;
+    private Ball ball;
 
-    public GamePanelPaint(Enemy enemy, Player player, RandomMap map, ObstacleManager obs) {
+    public GamePanelPaint(Enemy enemy, Player player, RandomMap map, ObstacleManager obs, Ball ball) {
         this.player = player;
         this.enemy = enemy;
         this.map = map;
         this.obs = obs;
+        this.ball = ball;
         this.setBounds(0, 0, 960, 780);
     }
 
@@ -31,6 +32,7 @@ public class GamePanelPaint extends JPanel {
         obs.draw(g2d);
         player.draw(g);
         enemy.draw(g2d);
+        ball.draw(g2d);
 
         g2d.dispose();
     }
