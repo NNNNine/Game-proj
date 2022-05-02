@@ -70,21 +70,23 @@ public class Game extends JPanel implements Runnable {
         });
 
         // Button test as a ball attack enemy
-        Icon iconNext = new ImageIcon("imgs/NextButton.png");
-        buttonTest2 = new JButton(iconNext);
-        buttonTest2.setBounds(0, 115, 300, 95);
-        buttonTest2.addActionListener(e -> {
-            if (!enemy.decreaseHP(player.getAttack())) {
-                cardLayout.show(mainPanel, "winScreen");
-            }
-            System.out.println(enemy.getHP());
-        });
+        /*
+         * Icon iconNext = new ImageIcon("imgs/NextButton.png");
+         * buttonTest2 = new JButton(iconNext);
+         * buttonTest2.setBounds(0, 115, 300, 95);
+         * buttonTest2.addActionListener(e -> {
+         * if (!enemy.decreaseHP(player.getAttack())) {
+         * cardLayout.show(mainPanel, "winScreen");
+         * }
+         * System.out.println(enemy.getHP());
+         * });
+         */
 
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setLayout(null);
 
         this.add(buttonTest);
-        this.add(buttonTest2);
+        // this.add(buttonTest2);
 
         // Player player = (Player) this.player;
         // Enemy enemy = (Enemy) this.enemy;
@@ -127,21 +129,23 @@ public class Game extends JPanel implements Runnable {
         });
 
         // Button test as a ball attack enemy
-        Icon iconNext = new ImageIcon("imgs/NextButton.png");
-        buttonTest2 = new JButton(iconNext);
-        buttonTest2.setBounds(0, 115, 300, 95);
-        buttonTest2.addActionListener(e -> {
-            if (!enemy.decreaseHP(player.getAttack())) {
-                cardLayout.show(mainPanel, "winScreen");
-            }
-            System.out.println(enemy.getHP());
-        });
+        /*
+         * Icon iconNext = new ImageIcon("imgs/NextButton.png");
+         * buttonTest2 = new JButton(iconNext);
+         * buttonTest2.setBounds(0, 115, 300, 95);
+         * buttonTest2.addActionListener(e -> {
+         * if (!enemy.decreaseHP(player.getAttack())) {
+         * cardLayout.show(mainPanel, "winScreen");
+         * }
+         * System.out.println(enemy.getHP());
+         * });
+         */
 
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setLayout(null);
 
         this.add(buttonTest);
-        this.add(buttonTest2);
+        // this.add(buttonTest2);
 
         Player player = (Player) this.player;
         Enemy enemy = (Enemy) this.enemy;

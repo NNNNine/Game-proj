@@ -42,7 +42,7 @@ public class Ball implements MouseListener, ActionListener {
     }
 
     public void draw(Graphics g) {
-        if (ball_ammo > 0 || isBallOut) {
+        if (ball_ammo > 0) {
             Graphics2D g2 = (Graphics2D) g;
 
             g2.setColor(Color.RED);
@@ -51,7 +51,7 @@ public class Ball implements MouseListener, ActionListener {
     }
 
     public Rectangle getBound() {
-        return new Rectangle((int) x, (int) y, width + 5, height + 5);
+        return new Rectangle((int) x, (int) y, width, height);
     }
 
     public void ballMove(int x, int y) {
@@ -136,7 +136,7 @@ public class Ball implements MouseListener, ActionListener {
             if (getBound().intersects(g.getObsdown().obs_bound.get(i).getBound())) {
                 if (g.getObsdown().obs_bound.get(i).powerUp == true) {
                     if (g.getObsdown().obs_bound.get(i).power == 10) {
-                        if (ball_ammo > 0) {
+                        if (ball_ammo >= 0) {
                             ball_ammo *= 10;
                         } else
                             ball_ammo += 10;
@@ -145,7 +145,7 @@ public class Ball implements MouseListener, ActionListener {
                 }
 
                 if (g.getObsdown().obs_bound.get(i).collision == true) {
-                    if (g.getObsdown().obs_bound.get(i).getBound().y + 60 < this.y
+                    if (g.getObsdown().obs_bound.get(i).getBound().y < this.y
                             || g.getObsdown().obs_bound.get(i).getBound().y > this.y) {
                         yVelocity *= -1;
                     }
@@ -163,13 +163,16 @@ public class Ball implements MouseListener, ActionListener {
             if (getBound().intersects(g.getObsup().obs_bound.get(i).getBound())) {
                 if (g.getObsup().obs_bound.get(i).powerUp == true) {
                     if (g.getObsup().obs_bound.get(i).power == 10) {
-                        ball_ammo *= 10;
+                        if (ball_ammo >= 0) {
+                            ball_ammo *= 10;
+                        } else
+                            ball_ammo += 10;
                     } else
                         ball_ammo += g.getObsup().obs_bound.get(i).power;
                 }
 
                 if (g.getObsup().obs_bound.get(i).collision == true) {
-                    if (g.getObsup().obs_bound.get(i).getBound().y + 60 < this.y
+                    if (g.getObsup().obs_bound.get(i).getBound().y < this.y
                             || g.getObsup().obs_bound.get(i).getBound().y > this.y) {
                         yVelocity *= -1;
                     }
