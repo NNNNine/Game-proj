@@ -10,7 +10,7 @@ public class ObstacleManager {
 
     Game g;
     Obstacle[] obs;
-    private boolean are_random, second_rand;
+    private boolean are_random;
     private int[] r_obs = { 1, 3, 1, 1, 5, 1 };
     private int row;
     public LinkedList<Obstacle> obs_bound = new LinkedList<Obstacle>();
@@ -21,7 +21,6 @@ public class ObstacleManager {
         row = r;
         obs = new Obstacle[6];
         are_random = false;
-        second_rand = false;
         // t_rand = new RandomObs();
 
         getObsImage();
@@ -38,18 +37,22 @@ public class ObstacleManager {
             obs[2] = new Obstacle();
             obs[2].image = ImageIO.read(getClass().getResourceAsStream("res/ball+5.png"));
             obs[2].powerUp = true;
+            obs[2].power = 5;
 
             obs[3] = new Obstacle();
             obs[3].image = ImageIO.read(getClass().getResourceAsStream("res/ball+15.png"));
-            obs[2].powerUp = true;
+            obs[3].powerUp = true;
+            obs[3].power = 15;
 
             obs[4] = new Obstacle();
             obs[4].image = ImageIO.read(getClass().getResourceAsStream("res/ball-15.png"));
-            obs[2].powerUp = true;
+            obs[4].powerUp = true;
+            obs[4].power = -15;
 
             obs[5] = new Obstacle();
             obs[5].image = ImageIO.read(getClass().getResourceAsStream("res/ballx10.png"));
-            obs[2].powerUp = true;
+            obs[5].powerUp = true;
+            obs[5].power = 10;
 
         } catch (IOException e) {
             e.printStackTrace();

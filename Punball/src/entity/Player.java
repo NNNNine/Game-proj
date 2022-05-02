@@ -14,7 +14,7 @@ import main.KeyHandler;
 import main.ID;
 
 public class Player extends Entity {
-
+    public int ball_ammo = 10;
     public int playerSpeed;
     private int x, y;
     public BufferedImage left1, left2, right1, right2, stand;
@@ -27,14 +27,14 @@ public class Player extends Entity {
 
     JProgressBar playerHealthBar;
 
-    public Player(Game g, KeyHandler k) {
+    public Player(Game g, KeyHandler k, Enemy enemy) {
         // super(480, 665, ID.Player);
         setDefaultLocation();
         game = g;
         this.keyH = k;
         dir = "stand";
 
-        ball = new Ball(this.x, this.y, game, this);
+        ball = new Ball(this.x, this.y, game, this, enemy);
 
         playerHealthBar = new JProgressBar();
         playerHealthBar.setValue(100);
@@ -47,14 +47,13 @@ public class Player extends Entity {
     }
 
     // Overloaded constructor for upgrade screen
-    public Player(Game g, KeyHandler k, int hpLevel, int attack) {
+    public Player(Game g, KeyHandler k, int hpLevel, int attack, Enemy enemy) {
         // super(480, 665, ID.Player);
         setDefaultLocation();
         game = g;
         this.keyH = k;
         dir = "stand";
-
-        ball = new Ball(this.x, this.y,game, this);
+        ball = new Ball(this.x, this.y, game, this, enemy);
 
         setHP(hpLevel);
         setAttack(attack);
@@ -91,11 +90,11 @@ public class Player extends Entity {
         }
     }
 
-    public int getX(){
+    public int getX() {
         return this.x;
     }
 
-    public int getY(){
+    public int getY() {
         return this.y;
     }
 
@@ -178,7 +177,7 @@ public class Player extends Entity {
 
     }
 
-    public Ball getBall(){
+    public Ball getBall() {
         return ball;
     }
 }

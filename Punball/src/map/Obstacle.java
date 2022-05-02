@@ -7,6 +7,7 @@ public class Obstacle {
     public BufferedImage image;
     public boolean collision = false;
     public boolean powerUp = false;
+    public int power;
     private Rectangle bound = new Rectangle();;
 
     public void setBound(int x, int y) {

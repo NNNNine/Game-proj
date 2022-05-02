@@ -10,10 +10,6 @@ public class Game extends JPanel implements Runnable {
 
     KeyHandler keyH;
 
-    int playerX = 480;
-    int playerY = 665;
-    int playerSpeed = 3;
-
     // Screen Res
     public final int maxScreenCol = 16;
     public final int maxScreenRow = 13;
@@ -54,15 +50,13 @@ public class Game extends JPanel implements Runnable {
         keyH = new KeyHandler();
 
         // Objects
-        player = new Player(this, KeyH);
         enemy = new Enemy();
+        player = new Player(this, KeyH, enemy);
+
+        // Map-Objects
+        map = new RandomMap();
         obs_m_up = new ObstacleManager(this, 7);
         obs_m_down = new ObstacleManager(this, 9);
-        map = new RandomMap();
-        // Map-Objects
-        // handler.addObject(new Map(0, 180, 300, 540));
-        // handler.addObject(new Map(0, 0, 960, 180));
-        // handler.addObject(new Map(659, 180, 300, 540));
 
         // Button test as a ball attack player
         Icon iconUpgrade = new ImageIcon("imgs/UpgradeButton.png");
@@ -113,17 +107,13 @@ public class Game extends JPanel implements Runnable {
         keyH = new KeyHandler();
 
         // Objects
-        player = new Player(this, KeyH, hpLevel, attack);
+        enemy = new Enemy();
+        player = new Player(this, KeyH, hpLevel, attack, enemy);
+
+        // Map-Objects
+        map = new RandomMap();
         obs_m_up = new ObstacleManager(this, 7);
         obs_m_down = new ObstacleManager(this, 9);
-        // Map-Objects
-        /*
-         * handler.addObject(new Map(0, 180, 300, 540));
-         * handler.addObject(new Map(0, 0, 960, 180));
-         * handler.addObject(new Map(659, 180, 300, 540));
-         */
-        enemy = new Enemy();
-        map = new RandomMap();
 
         // Button test as a ball attack player
         Icon iconUpgrade = new ImageIcon("imgs/UpgradeButton.png");
@@ -186,7 +176,7 @@ public class Game extends JPanel implements Runnable {
     }
 
     public Player getPlayer() {
-        return (Player) player;
+        return player;
     }
 
     public void startGameThread() {
@@ -232,4 +222,19 @@ public class Game extends JPanel implements Runnable {
         this.player.update();
     }
 
+    public CardLayout getCardLayout() {
+        return cardLayout;
+    }
+
+    public JPanel getMainPanel() {
+        return mainPanel;
+    }
+
+    public ObstacleManager getObsup() {
+        return obs_m_up;
+    }
+
+    public ObstacleManager getObsdown() {
+        return obs_m_down;
+    }
 }
